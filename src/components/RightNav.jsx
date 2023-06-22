@@ -24,6 +24,7 @@ const Ul = styled.ul`
     padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;
     justify-content: center;
+    z-index: 999;
 
     img {
       width: 2em;

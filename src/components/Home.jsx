@@ -9,12 +9,14 @@ import '../index.css'
 
 const images = [
   {
-    url: 'https://images.pexels.com/photos/17211589/pexels-photo-17211589/free-photo-of-photographer-on-street-under-green-house.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-  {
     url: 'https://images.pexels.com/photos/17211586/pexels-photo-17211586/free-photo-of-photographer-standing-on-street-under-green-building.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
   },
-  { url: '/watch-this.jpg' },
+  {
+    url: '  https://images.pexels.com/photos/17211589/pexels-photo-17211589/free-photo-of-photographer-on-street-under-green-house.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  },
+  {
+    url: 'https://images.pexels.com/photos/17211588/pexels-photo-17211588/free-photo-of-bicycle-parked-under-green-house.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  },
 ]
 
 const HomeContainer = styled.div`
@@ -70,23 +72,8 @@ const H2 = styled.h2`
   }
 `
 
-const SectionOne = styled.div`
-  height: 50vh;
-  color: black;
-  padding: 3em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2em;
-`
-
-const SectionOneProducts = styled.div`
-  display: flex;
-  justify-content: space-around;
-  gap: 2em;
-  width: 100vw;
-  max-width: 800px;
+const SliderContainer = styled.div`
+  height: 53vh;
 `
 
 function Home() {
@@ -97,33 +84,22 @@ function Home() {
         <H2>Luxary Perfection</H2>
         <Button to='/shop'>Shop Now</Button>
       </Hero> */}
-      <SimpleImageSlider
-        width={'97%'}
-        height={'80vh'}
-        images={images}
-        showBullets={true}
-        showNavs={false}
-        navSize={50}
-        navMargin={5}
-        style={{
-          margin: '0 auto',
-          marginTop: '2em',
-        }}
-        className='rsis-important'
-      />
-      <Hero></Hero>
-      <SectionOne>
-        <div>
-          <h2>Only the Highest Quality Ingredients</h2>
-          <p>In fact, we grow most of them ourselves on our 17-acre farm!</p>
-        </div>
-        <SectionOneProducts>
-          <div>One</div>
-          <div>Two</div>
-          <div>Three</div>
-        </SectionOneProducts>
-        <Button>Shop Now</Button>
-      </SectionOne>
+      <SliderContainer>
+        <SimpleImageSlider
+          width={'100vw'}
+          height={'80vh'}
+          images={images}
+          showBullets={true}
+          showNavs={true}
+          navSize={25}
+          navMargin={5}
+          style={{
+            margin: '0 auto',
+            marginTop: '2em',
+            objectFit: 'cover',
+          }}
+        />
+      </SliderContainer>
     </HomeContainer>
   )
 }
