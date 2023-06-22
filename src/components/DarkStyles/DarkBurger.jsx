@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import RightNav from './RightNav'
+import DarkRightNav from './DarkRightNav'
 
 const StyledBurger = styled.div`
   width: 1.5rem;
@@ -38,7 +38,7 @@ const StyledBurger = styled.div`
   }
 `
 
-const Burger = props => {
+const DarkBurger = props => {
   const [open, setOpen] = useState(false)
 
   return (
@@ -48,9 +48,9 @@ const Burger = props => {
         <div />
         <div />
       </StyledBurger>
-      <RightNav open={open} />
+      <DarkRightNav open={open} />
     </>
   )
 }
 
-export default Burger
+export default DarkBurger

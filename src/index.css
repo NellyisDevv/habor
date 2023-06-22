@@ -1,3 +1,6 @@
+/* Font family */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 /*
   1. Use a more-intuitive box-sizing model.
 */
@@ -65,4 +68,36 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+.profile-img {
+  width: 1.5em;
+}
+
+/* Scrollbar color */
+
+/*
+html {
+  --scrollbarBG: #ffffff;
+  --thumbBG: #85a8b9;
+}
+body::-webkit-scrollbar {
+  width: 12px;
+}
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
+*/
+
+.rsis-image {
+  background-position: center !important;
 }

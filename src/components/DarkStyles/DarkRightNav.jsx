@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 
 const Ul = styled.ul`
+  color: black;
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
@@ -50,7 +51,7 @@ const NavLink = styled(Link)`
   }
 `
 
-const RightNav = ({ open, home }) => {
+const DarkRightNav = ({ open, home }) => {
   return (
     <Ul open={open}>
       <NavLink to='/about'>About</NavLink>
@@ -75,4 +76,4 @@ const RightNav = ({ open, home }) => {
   )
 }
 
-export default RightNav
+export default DarkRightNav
