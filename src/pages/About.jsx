@@ -1,10 +1,15 @@
 import React from 'react'
 import device from '../../device'
 import styled from 'styled-components'
-import DarkNav from './DarkStyles/DarkNav'
+import Nav from '../components/Nav'
+import Footer from '../components/Footer'
+
+const AboutContainer = styled.div`
+  font-family: 'poppins', sans-serif;
+  color: black;
+`
 
 const Container = styled.div`
-  font-family: 'poppins', sans-serif;
   max-width: 800px;
   margin: auto;
   padding: 5rem 2.5rem 5rem 2.5rem;
@@ -23,7 +28,7 @@ const Container = styled.div`
     font-weight: 300;
   }
 
-  @media ${device.sm} {
+  @media ${device.lg} {
     padding: 15rem 0rem 15rem 0rem;
   }
 `
@@ -38,8 +43,7 @@ const Img = styled.div`
 
 function About() {
   return (
-    <div>
-      <DarkNav />
+    <AboutContainer>
       <Container>
         <h2>Our Story</h2>
         <p>
@@ -54,7 +58,8 @@ function About() {
         </p>
       </Container>
       <Img></Img>
-    </div>
+      <Footer></Footer>
+    </AboutContainer>
   )
 }
 

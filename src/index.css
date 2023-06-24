@@ -97,8 +97,3 @@ body::-webkit-scrollbar-thumb {
   border: 3px solid var(--scrollbarBG);
 }
 */
-
-.rsis-image {
-  background-position: center !important;
-  object-fit: cover !important;
-}

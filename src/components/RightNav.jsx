@@ -24,7 +24,6 @@ const Ul = styled.ul`
     padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;
     justify-content: center;
-    z-index: 999;
 
     img {
       width: 2em;
@@ -51,7 +50,7 @@ const NavLink = styled(Link)`
   }
 `
 
-const RightNav = ({ open, home }) => {
+const RightNav = ({ open }) => {
   return (
     <Ul open={open}>
       <NavLink to='/about'>About</NavLink>
@@ -63,13 +62,6 @@ const RightNav = ({ open, home }) => {
             'Login'
           : ''}
       </NavLink>
-
-      {/* {homePage ? (
-        <NavLink to='/shop'>Shop</NavLink>
-      ) : (
-        <NavLinkDark to='/shop'>Dont Shop</NavLinkDark>
-      )} */}
-
       {/* <li>Sign In</li>
       <li>Sign Up</li> */}
     </Ul>

@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import RightNav from './RightNav'
 
 const StyledBurger = styled.div`
-  width: 1.5rem;
-  height: 1.5rem;
-  z-index: 9999;
+  width: 2rem;
+  height: 2rem;
+  z-index: 20;
   display: none;
   cursor: pointer;
 
@@ -16,7 +16,7 @@ const StyledBurger = styled.div`
   }
 
   div {
-    width: 1.5rem;
+    width: 2rem;
     height: 0.07rem;
     background-color: ${({ open }) => (open ? '#000000' : '#000000')};
     /* border-radius: 10px; */
@@ -38,7 +38,7 @@ const StyledBurger = styled.div`
   }
 `
 
-const Burger = props => {
+const Burger = () => {
   const [open, setOpen] = useState(false)
 
   return (

@@ -15,8 +15,10 @@
     "react-awesome-slider": "^4.1.0",
     "react-burger-menu": "^3.0.9",
     "react-dom": "^18.2.0",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.13.0",
     "react-simple-image-slider": "^2.4.1",
+    "react-slideshow-image": "^4.2.1",
     "styled-components": "^6.0.0-rc.3"
   },
   "devDependencies": {

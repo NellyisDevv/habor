@@ -16,7 +16,7 @@ const Container = styled.section`
   /* max-width: 1800px;
   margin: auto; */
   @media ${device.sm} {
-    padding: 2.8em 5em 0em 5em;
+    padding: 2.8em 3em 0em 3em;
   }
 `
 
