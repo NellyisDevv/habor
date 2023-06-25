@@ -1,69 +1,128 @@
 import React from 'react'
 import styled from 'styled-components'
+import { css } from 'styled-components'
 import device from '../../device'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Nav from '../components/Nav'
+import '/server'
+import AllProducts from '../components/AllProducts'
 
-const HomeContainer = styled.div`
+const ProductContainer = styled.div`
   font-family: 'poppins', sans-serif;
 `
 
-const HomeNavigation = styled.div`
-  min-height: 40vh;
-  background-image: url('https://images.pexels.com/photos/17211586/pexels-photo-17211586/free-photo-of-photographer-standing-on-street-under-green-building.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  object-fit: cover;
-  margin-top: 2em;
+const Products = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 90%;
+  max-width: 1400px;
+  margin: auto;
+  gap: 3em;
+  /* background-color: lightgreen; */
+  padding: 1em;
+  margin-top: 3em;
+  margin-bottom: 4em;
 `
 
-const Hero = styled.div`
-  height: 40vh;
+const Explore = styled.div`
+  /* background-color: lightgoldenrodyellow; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: white;
-  gap: 2em;
+  padding-top: 5em;
+
+  h2 {
+    margin-bottom: 0.2em;
+    padding-right: 1em;
+    padding-left: 0.5em;
+    font-weight: 500;
+  }
+`
+
+const ButtonContainer = styled.div`
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  flex-wrap: wrap;
 `
 
 const Button = styled(Link)`
-  background-color: white;
-  color: black;
   text-decoration: none;
-  font-size: 1rem;
-  padding: 0.8em;
   border: none;
-  width: 8em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0.1em;
+  color: white;
+  padding: 0.5em;
+  font-size: 0.9rem;
+  border-radius: 0.05em;
+  cursor: pointer;
 
-  @media ${device.sm} {
-    font-size: 1.2rem;
-  }
+  ${props =>
+    props.skin &&
+    css`
+      background-color: lightcoral;
+    `}
+
+  ${props =>
+    props.scent &&
+    css`
+      background-color: lightslategrey;
+    `}
+
+    ${props =>
+    props.wear &&
+    css`
+      background-color: lightsalmon;
+    `}
 `
 
-const H2 = styled.h2`
-  text-align: center;
-  font-size: 3rem;
-
-  @media ${device.sm} {
-    font-size: 3.5rem;
-  }
+const P = styled(Link)`
+  color: #4d4d4d;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.9rem;
 `
 
 function Shop() {
+  const [products, setProducts] = React.useState([])
+
+  React.useEffect(() => {
+    async function products() {
+      const res = await fetch(`/api/products`)
+
+      let data = await res.json()
+      const allProducts = data.products.map(product => product)
+      setProducts(allProducts)
+    }
+    products()
+  }, [])
+
+  const allProducts = products.map(product => (
+    <AllProducts
+      key={product.id}
+      id={product.id}
+      name={product.name}
+      price={product.price}
+      description={product.description}
+      imageUrl={product.imageUrl}
+    />
+  ))
+
   return (
-    <HomeContainer>
-      <HomeNavigation>
-        <Hero>
-          <H2>Shop</H2>
-        </Hero>
-      </HomeNavigation>
-    </HomeContainer>
+    <ProductContainer>
+      <Explore>
+        <h2>Explore our product options</h2>
+        <ButtonContainer>
+          <Button skin>Skincare</Button>
+          <Button scent>Scents</Button>
+          <Button wear>Wearables</Button>
+          <P>Clear filters</P>
+        </ButtonContainer>
+      </Explore>
+      <Products>{allProducts}</Products>
+    </ProductContainer>
   )
 }
 

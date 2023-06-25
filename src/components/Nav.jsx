@@ -16,7 +16,7 @@ const Container = styled.section`
   /* max-width: 1800px;
   margin: auto; */
   @media ${device.sm} {
-    padding: 2.8em 3em 0em 3em;
+    padding: 2.8em 4em 0em 4em;
   }
 `
 
@@ -25,7 +25,7 @@ const HeaderContainer = styled.div``
 const CartContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.2em;
+  gap: 3em;
 
   p {
     font-size: 1.1rem;
@@ -54,6 +54,16 @@ const H1 = styled(Link)`
   text-decoration: none;
   font-size: 1.8rem;
   font-weight: 500;
+
+  @media ${device.md} {
+    padding-right: 1.2em;
+  }
+`
+
+const Cart = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 function Nav() {
@@ -65,8 +75,10 @@ function Nav() {
       </HeaderContainer>
       <CartContainer>
         <Login to='/login'>Login</Login>
-        <CartImage src='/cart-black.svg' />
-        <p>0</p>
+        <Cart>
+          <CartImage src='/cart-black.svg' />
+          <p>0</p>
+        </Cart>
       </CartContainer>
     </Container>
   )

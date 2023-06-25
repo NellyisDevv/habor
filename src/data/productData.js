@@ -1,6 +1,6 @@
 export default [
   {
-    img: 'https://m.media-amazon.com/images/I/71rxMdEC2KL._AC_UL1500_.jpg',
+    img: 'https://m.media-amazon.com/images/I/71ijx2DmebL._AC_UX679_.jpg',
     alt: '',
   },
   {

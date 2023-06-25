@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Nav from '../components/Nav'
 import Product from '../components/Product'
 import productData from '../data/productData'
-import Footer from '../components/Footer'
 
 const HomeContainer = styled.div`
   font-family: 'poppins', sans-serif;
@@ -129,23 +128,27 @@ const SectionTwo = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 4em;
-  padding: 1em;
+  /* background-color: lightblue; */
+  /* width: 50%; */
 
   img {
     height: 30vh;
   }
 
-  @media ${device.sm} {
+  @media ${device.md} {
     gap: 10em;
 
     img {
       height: 24vh;
     }
   }
+
+  @media ${device.md} {
+  }
 `
 
-const mappedProducts = productData.map(product => (
-  <Product img={product.img} alt={product.alt} />
+const mappedProducts = productData.map((product, index) => (
+  <Product key={index} img={product.img} alt={product.alt} />
 ))
 
 function Home() {
@@ -154,7 +157,7 @@ function Home() {
       <HomeNavigation>
         <Hero>
           <H2>
-            Luxary <MobileBreak /> Perfection
+            Luxary <MobileBreak /> Perfected
           </H2>
           <BtnContainer>
             <Button coral to='/shop'>
@@ -175,7 +178,6 @@ function Home() {
         <Button coral>Shop Now</Button>
       </SectionOneContainer>
       <HomeNavigation second></HomeNavigation>
-      <Footer />
     </HomeContainer>
   )
 }

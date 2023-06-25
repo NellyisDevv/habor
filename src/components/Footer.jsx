@@ -9,6 +9,7 @@ const FooterContainer = styled.div`
   min-height: 19vh;
   display: flex;
   align-items: center;
+  font-family: 'poppins', sans-serif;
 `
 
 const Content = styled.div`

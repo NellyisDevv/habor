@@ -2,7 +2,6 @@ import React from 'react'
 import device from '../../device'
 import styled from 'styled-components'
 import Nav from '../components/Nav'
-import Footer from '../components/Footer'
 
 const AboutContainer = styled.div`
   font-family: 'poppins', sans-serif;
@@ -58,7 +57,6 @@ function About() {
         </p>
       </Container>
       <Img></Img>
-      <Footer></Footer>
     </AboutContainer>
   )
 }

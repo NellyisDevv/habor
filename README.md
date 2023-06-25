@@ -9,3 +9,9 @@
 - https://www.svgrepo.com/svg/418198/cart-shopping-shop?edit=true
 
 - https://jsramblings.com/how-to-use-media-queries-with-styled-components/
+
+- https://stackoverflow.com/questions/1301512/truncate-a-string-straight-javascript
+
+- https://stackoverflow.com/questions/9071830/contain-an-image-within-a-div
+
+- https://miragejs.com/tutorial/part-1/
