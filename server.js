@@ -100,7 +100,7 @@ createServer({
       return schema.products.all()
     })
 
-    this.get('/vans/:id', (schema, request) => {
+    this.get('/products/:id', (schema, request) => {
       const id = request.params.id
       return schema.products.find(id)
     })

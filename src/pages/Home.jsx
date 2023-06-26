@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import { css } from 'styled-components'
 import device from '../../device'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import Nav from '../components/Nav'
-import Product from '../components/Product'
 import productData from '../data/productData'
 
 const HomeContainer = styled.div`
@@ -148,7 +146,7 @@ const SectionTwo = styled.div`
 `
 
 const mappedProducts = productData.map((product, index) => (
-  <Product key={index} img={product.img} alt={product.alt} />
+  <img key={index} src={product.img} alt={product.alt} />
 ))
 
 function Home() {
@@ -163,7 +161,7 @@ function Home() {
             <Button coral to='/shop'>
               Shop Now
             </Button>
-            <Button to='/shop'>Learn More</Button>
+            <Button to='/about'>Learn More</Button>
           </BtnContainer>
         </Hero>
       </HomeNavigation>

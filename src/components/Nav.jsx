@@ -55,12 +55,13 @@ const H1 = styled(Link)`
   font-size: 1.8rem;
   font-weight: 500;
 
-  @media ${device.md} {
+  @media ${device.lg} {
     padding-right: 1.2em;
   }
 `
 
-const Cart = styled.div`
+const Cart = styled(Link)`
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,7 +76,7 @@ function Nav() {
       </HeaderContainer>
       <CartContainer>
         <Login to='/login'>Login</Login>
-        <Cart>
+        <Cart to='/cart'>
           <CartImage src='/cart-black.svg' />
           <p>0</p>
         </Cart>

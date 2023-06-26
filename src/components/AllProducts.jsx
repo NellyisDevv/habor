@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 
 function AllProducts({ name, price, description, imageUrl, id }) {
   var length = 53
@@ -13,9 +14,11 @@ function AllProducts({ name, price, description, imageUrl, id }) {
     /* background-color: lightcoral; */
   `
 
-  const ProductContainer = styled.div`
+  const ProductContainer = styled(Link)`
     /* background-color: lightblue; */
     display: flex;
+    color: black;
+    text-decoration: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -41,8 +44,13 @@ function AllProducts({ name, price, description, imageUrl, id }) {
     font-weight: 600;
   `
 
+  const ProductLink = styled(Link)`
+    text-decoration: none;
+    color: black;
+  `
+
   return (
-    <ProductContainer>
+    <ProductContainer to={`/shop/${id}`}>
       <ProductImage src={imageUrl} alt='' />
       <ProductInfo>
         {' '}
