@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import device from '../../device'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import productData from '../data/productData'
 
 const HomeContainer = styled.div`

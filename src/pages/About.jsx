@@ -1,7 +1,6 @@
 import React from 'react'
 import device from '../../device'
 import styled from 'styled-components'
-import Nav from '../components/Nav'
 
 const AboutContainer = styled.div`
   font-family: 'poppins', sans-serif;

@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
-import device from '../../device'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import Nav from '../components/Nav'
+import device from '../../../device'
+import { Link } from 'react-router-dom'
 import '/server'
-import AllProducts from '../components/AllProducts'
+import Product from '../../components/Product'
 
 const ProductContainer = styled.div`
   font-family: 'poppins', sans-serif;
@@ -89,18 +88,17 @@ function Shop() {
   const [products, setProducts] = React.useState([])
 
   React.useEffect(() => {
-    async function products() {
+    const fetchData = async () => {
       const res = await fetch(`/api/products`)
-
       let data = await res.json()
-      const allProducts = data.products.map(product => product)
-      setProducts(allProducts)
+      setProducts(data.products)
     }
-    products()
+
+    fetchData()
   }, [])
 
-  const allProducts = products.map(product => (
-    <AllProducts
+  const mappedProducts = products.map(product => (
+    <Product
       key={product.id}
       id={product.id}
       name={product.name}
@@ -121,7 +119,7 @@ function Shop() {
           <P>Clear filters</P>
         </ButtonContainer>
       </Explore>
-      <Products>{allProducts}</Products>
+      <Products>{mappedProducts}</Products>
     </ProductContainer>
   )
 }

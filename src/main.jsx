@@ -4,24 +4,29 @@ import './index.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
-import Shop from './pages/Shop'
-import Nav from './components/Nav'
-import Footer from './components/Footer'
-import ProductDetail from './pages/ProductDetail'
-import '/server'
+import Shop from './pages/Shop/Shop'
+import ProductDetail from './pages/Shop/ProductDetail'
+import Dashboard from './pages/Host/Dashboard'
+import Income from './pages/Host/Income'
+import Reviews from './pages/Host/Reviews'
+import Layout from './components/Layout'
+import DashboardNav from './components/DashboardNav'
 
 function App() {
   return (
     <BrowserRouter>
-      {/* Moving navigation here caused an issue now when routing to new pages in mobile the navigation menu will not reset instead it will stay open and users need to click out of it (test this in mobile and cosider going back to each page having their own navigation component) */}
-      <Nav />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/shop' element={<Shop />} />
-        <Route path='/shop/:id' element={<ProductDetail />} />
+        <Route element={<Layout />}>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/shop' element={<Shop />} />
+          <Route path='/shop/:id' element={<ProductDetail />} />
+          <Route path='/host' element={<Dashboard />}>
+            <Route path='/host/income' element={<Income />} />
+            <Route path='/host/reviews' element={<Reviews />} />
+          </Route>
+        </Route>
       </Routes>
-      <Footer />
     </BrowserRouter>
   )
 }

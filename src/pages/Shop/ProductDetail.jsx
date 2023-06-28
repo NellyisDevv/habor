@@ -2,24 +2,30 @@ import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import { useParams, Link } from 'react-router-dom'
+import device from '../../../device'
 import '/server'
 
 const DetailContainer = styled.div`
   font-family: 'poppins', sans-serif;
-  min-height: 100vh;
+  min-height: 75vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
 const ProductListing = styled.div`
-  width: 90%;
-  max-width: 1400px;
+  width: 100%;
+  max-width: 1300px;
   margin: auto;
   padding: 2em;
   display: flex;
   flex-wrap: wrap;
-  gap: 1em;
+  /* background-color: lightskyblue; */
+
+  @media ${device.md} {
+    width: 90%;
+    padding: 4em;
+  }
 `
 
 const ProductImage = styled.div`
@@ -27,11 +33,14 @@ const ProductImage = styled.div`
   justify-content: center;
   align-items: center;
   /* background-color: lightpink; */
-  padding: 0.5em;
   width: 28em;
   margin: auto;
+  height: 28em;
+
   img {
-    width: 100%;
+    width: 100%; /* or any custom size */
+    height: 100%;
+    object-fit: contain;
   }
 `
 
@@ -40,6 +49,7 @@ const ProductInfo = styled.div`
   flex-direction: column;
   gap: 1.3em;
   /* background-color: lightgreen; */
+  overflow: scroll;
   padding: 1em;
   width: 28em;
   margin: auto;
@@ -58,6 +68,24 @@ const Input = styled.input`
   padding: 1.5em;
   width: 8em;
   margin-top: 0.6em;
+`
+
+const ImagePreview = styled.div`
+  /* background-color: lightgoldenrodyellow; */
+  height: 100%;
+  cursor: pointer;
+  display: none;
+  padding: 1em;
+
+  img {
+    height: 3em;
+    width: 3em;
+    object-fit: contain;
+  }
+
+  @media ${device.lg} {
+    display: block;
+  }
 `
 
 function ProductDetail() {
@@ -79,6 +107,9 @@ function ProductDetail() {
       {product ? (
         <ProductListing>
           <ProductImage>
+            <ImagePreview>
+              {/* <img src={product.imageUrl} alt='' /> */}
+            </ImagePreview>
             <img src={product.imageUrl} alt='' />
           </ProductImage>
           <ProductInfo>

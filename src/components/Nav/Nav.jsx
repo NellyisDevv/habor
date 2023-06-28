@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import device from '../../device'
+import device from '../../../device'
 import Burger from './Burger'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 
 const Container = styled.section`
   color: black;
-  padding: 2em 2em 0em 2em;
+  padding: 2em 1em 0em 1em;
   font-family: 'poppins', sans-serif;
   display: flex;
   justify-content: space-between;
@@ -65,6 +65,7 @@ const Cart = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: black;
 `
 
 function Nav() {

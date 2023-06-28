@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-function AllProducts({ name, price, description, imageUrl, id }) {
+function Product({ name, price, description, imageUrl, id }) {
   var length = 53
   var myString = name
   var myTruncatedString = myString.substring(0, length)
@@ -44,11 +44,6 @@ function AllProducts({ name, price, description, imageUrl, id }) {
     font-weight: 600;
   `
 
-  const ProductLink = styled(Link)`
-    text-decoration: none;
-    color: black;
-  `
-
   return (
     <ProductContainer to={`/shop/${id}`}>
       <ProductImage src={imageUrl} alt='' />
@@ -61,4 +56,4 @@ function AllProducts({ name, price, description, imageUrl, id }) {
   )
 }
 
-export default AllProducts
+export default Product
