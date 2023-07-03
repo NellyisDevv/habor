@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 
 const Ul = styled.ul`
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
   padding: 0em;
+  z-index: 99;
 
   li {
     padding: 18px 10px;
@@ -31,7 +32,7 @@ const Ul = styled.ul`
   }
 `
 
-const NavLink = styled(Link)`
+const NavLinks = styled(NavLink)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,6 +40,11 @@ const NavLink = styled(Link)`
   text-decoration: none;
   margin: 0.5em;
   font-size: 1.1rem;
+
+  &:hover {
+    text-decoration: underline;
+    font-weight: 500;
+  }
 
   @media (max-width: 768px) {
     display: flex;
@@ -51,17 +57,41 @@ const NavLink = styled(Link)`
 `
 
 const RightNav = ({ open }) => {
+  const activeStyles = {
+    color: 'black',
+    textDecoration: 'underline',
+    fontWeight: 600,
+  }
+
   return (
     <Ul open={open}>
-      <NavLink to='/about'>About</NavLink>
-      <NavLink to='/shop'>Shop</NavLink>
-      <NavLink to='/host'>Host</NavLink>
-      <NavLink to='/sign-in'>
+      <NavLinks
+        to='/about'
+        style={({ isActive }) => (isActive ? activeStyles : null)}
+      >
+        About
+      </NavLinks>
+      <NavLinks
+        to='/shop'
+        style={({ isActive }) => (isActive ? activeStyles : null)}
+      >
+        Shop
+      </NavLinks>
+      <NavLinks
+        to='/host'
+        style={({ isActive }) => (isActive ? activeStyles : null)}
+      >
+        Host
+      </NavLinks>
+      <NavLinks
+        to='/login'
+        style={({ isActive }) => (isActive ? activeStyles : null)}
+      >
         {open
           ? // <img className='profile-img' src='/profile-circle-black.svg' alt='' />
             'Login'
-          : ''}
-      </NavLink>
+          : null}
+      </NavLinks>
       {/* <li>Sign In</li>
       <li>Sign Up</li> */}
     </Ul>

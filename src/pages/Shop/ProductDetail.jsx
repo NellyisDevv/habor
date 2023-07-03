@@ -36,6 +36,7 @@ const ProductImage = styled.div`
   width: 28em;
   margin: auto;
   height: 28em;
+  /* padding: 1em; */
 
   img {
     width: 100%; /* or any custom size */

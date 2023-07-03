@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import device from '../../../device'
 import Burger from './Burger'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 
 const Container = styled.section`
   color: black;
@@ -37,19 +37,24 @@ const CartImage = styled.img`
   width: 2.2em;
 `
 
-const Login = styled(Link)`
+const Login = styled(NavLink)`
   display: none;
   text-decoration: none;
   margin-right: 1.3em;
   color: black;
   font-size: 1.1rem;
 
+  &:hover {
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
   @media ${device.md} {
     display: block;
   }
 `
 
-const H1 = styled(Link)`
+const H1 = styled(NavLink)`
   color: black;
   text-decoration: none;
   font-size: 1.8rem;
@@ -60,7 +65,7 @@ const H1 = styled(Link)`
   }
 `
 
-const Cart = styled(Link)`
+const Cart = styled(NavLink)`
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -69,6 +74,12 @@ const Cart = styled(Link)`
 `
 
 function Nav() {
+  const activeStyles = {
+    color: 'black',
+    textDecoration: 'underline',
+    fontWeight: 600,
+  }
+
   return (
     <Container>
       <Burger />
@@ -76,7 +87,12 @@ function Nav() {
         <H1 to='/'>Habor</H1>
       </HeaderContainer>
       <CartContainer>
-        <Login to='/login'>Login</Login>
+        <Login
+          to='/login'
+          style={({ isActive }) => (isActive ? activeStyles : null)}
+        >
+          Login
+        </Login>
         <Cart to='/cart'>
           <CartImage src='/cart-black.svg' />
           <p>0</p>

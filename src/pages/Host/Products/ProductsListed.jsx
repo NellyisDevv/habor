@@ -2,10 +2,9 @@ import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { css } from 'styled-components'
 import styled from 'styled-components'
-import device from '../../../device'
-import vansList from '../../data/vansList'
-import productsList from '../../data/productsList'
-import topProducts from '../../data/topProducts'
+import device from '../../../../device'
+import productsList from '../../../data/productsList'
+import '/server'
 
 const DashContainer = styled.div`
   /* background-color: #7fbd7f; */
@@ -86,7 +85,7 @@ const Rate = styled.div`
 
 const ListedProducts = styled.div`
   /* background-color: lightblue; */
-  padding: 2em 0.9em;
+  padding: 1em 0.9em;
 `
 
 const ListedContainer = styled.div`
@@ -95,15 +94,24 @@ const ListedContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-bottom: 1em;
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  @media ${device.sm} {
+    h4 {
+      font-size: 1.5rem;
+    }
+  }
 `
 
 const Products = styled(Link)`
-  /* background-color: lightgreen; */
   padding: 1.2em;
   padding-right: 1.3em;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; */
   color: black;
   text-decoration: none;
 
@@ -118,6 +126,10 @@ const ProductInfo = styled.div`
   gap: 0.5em;
   align-items: center;
   /* background-color: lightblue; */
+
+  @media ${device.sm} {
+    width: 100%;
+  }
 `
 
 const ProductImg = styled.div`
@@ -127,6 +139,7 @@ const ProductImg = styled.div`
   background-size: cover;
   height: 3em;
   width: 3em;
+  border-radius: 0.4em;
   /* padding: 0.5em; */
 
   img {
@@ -134,19 +147,20 @@ const ProductImg = styled.div`
     width: 100%;
     object-fit: contain;
   }
+
+  @media ${device.sm} {
+    height: 5em;
+    width: 5em;
+    padding: 0.5em;
+  }
 `
 
 const ProductDetail = styled.div`
   /* background-color: lightcoral; */
-  max-width: 150px;
-
-  @media ${device.sm} {
-    max-width: 500px;
-  }
 `
 
-const mappedProducts = topProducts.map((van, index) => (
-  <Products key={index} to={`products/${van.id}`}>
+const mappedProducts = productsList.map((van, index) => (
+  <Products key={index} to={`${van.id}`}>
     <ProductInfo>
       <ProductImg>
         <img src={van.image} alt='' />
@@ -156,39 +170,21 @@ const mappedProducts = topProducts.map((van, index) => (
         <p>${van.price}</p>
       </ProductDetail>
     </ProductInfo>
-    <h6>Edit</h6>
   </Products>
 ))
 
-function Dashboard() {
+function ProductsListed() {
   return (
     <DashContainer>
-      <TotalIncome>
-        <One>
-          <h2>Welcome</h2>
-          <p>Income last 30 days</p>
-          <h4>$2,260</h4>
-          <Detail>Detials</Detail>
-        </One>
-      </TotalIncome>
-      <Review>
-        <h4>Review score</h4>
-        <Rate>
-          <img src='/images/star.svg' alt='' />
-          <p>5.0/5</p>
-        </Rate>
-        <Detail>Detials</Detail>
-      </Review>
       <ListedProducts>
         <ListedContainer>
-          <h4>Best selling products</h4>
-          <p>View all</p>
+          <h4>Your listed products</h4>
+          {/* <p>View all</p> */}
         </ListedContainer>
         {mappedProducts}
       </ListedProducts>
-      <Outlet />
     </DashContainer>
   )
 }
 
-export default Dashboard
+export default ProductsListed

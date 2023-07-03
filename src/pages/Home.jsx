@@ -4,6 +4,7 @@ import { css } from 'styled-components'
 import device from '../../device'
 import { Link } from 'react-router-dom'
 import productData from '../data/productData'
+import userReviews from '../data/userReviews'
 
 const HomeContainer = styled.div`
   font-family: 'poppins', sans-serif;
@@ -130,23 +131,181 @@ const SectionTwo = styled.div`
   /* width: 50%; */
 
   img {
-    height: 30vh;
+    height: 12em;
   }
 
   @media ${device.md} {
+    padding-right: 2em;
     gap: 10em;
 
     img {
-      height: 24vh;
+      height: 14em;
     }
   }
 
-  @media ${device.md} {
+  @media ${device.lg} {
+    img {
+      height: 16em;
+    }
   }
+`
+
+const BlogSubscribe = styled.div`
+  min-height: 20vh;
+  /* background-color: lightblue; */
+  padding: 1em;
+  text-align: center;
+  display: flex;
+  gap: 1.5em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5em;
+  margin-top: 2em;
+
+  h4 {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  @media ${device.md} {
+    h4 {
+      font-size: 2.3rem;
+    }
+  }
+`
+
+const BlogContainer = styled.div`
+  display: grid;
+  gap: 1em;
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding-bottom: 3em;
+  grid-template-columns: repeat(2, 1fr);
+  /* background-color: lightblue; */
+
+  @media ${device.md} {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3em;
+  }
+`
+
+const BlogImage = styled.div`
+  min-height: 150px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-position: 50% 50%;
+    object-fit: cover;
+  }
+
+  @media ${device.md} {
+    min-height: 300px;
+  }
+`
+
+const UserReviews = styled.div`
+  display: grid;
+  /* background-color: lightblue; */
+  max-width: 1200px;
+  gap: 1em;
+  row-gap: 4em;
+  margin: 2em auto;
+
+  @media ${device.md} {
+    margin: 5em auto;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media ${device.lg} {
+    margin: 5em auto;
+    grid-template-columns: repeat(3, 1fr);
+  }
+`
+
+const UserReview = styled.div`
+  width: 90%;
+  /* background-color: lightsalmon; */
+  max-width: 350px;
+  margin: auto;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px; /* border-radius: 0.6em; */
+`
+
+const UserImage = styled.img`
+  height: 4em;
+  width: 4em;
+  border-radius: 50%;
+  object-fit: cover;
+`
+
+const UserInfo = styled.div`
+  /* background-color: lightblue; */
+  display: flex;
+  padding: 1em;
+`
+
+const UserName = styled.div`
+  /* background-color: lightgreen; */
+  padding: 0.4em;
+  white-space: nowrap;
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: #757575;
+  }
+`
+
+const UserComment = styled.div`
+  /* background-color: lightseagreen; */
+  padding: 1em;
+
+  h4 {
+    margin-bottom: 0.8em;
+  }
+
+  p {
+    color: #757575;
+  }
+`
+
+const Stars = styled.div`
+  display: flex;
+  gap: 0.2em;
+  padding: 0em 1em 1.3em 1em;
 `
 
 const mappedProducts = productData.map((product, index) => (
   <img key={index} src={product.img} alt={product.alt} />
+))
+
+const mappedReviews = userReviews.map((review, index) => (
+  <UserReview key={index}>
+    <UserInfo>
+      <UserImage src={review.image} alt='' />
+      <UserName>
+        <h3>{review.name}</h3>
+        <p>{review.profession}</p>
+      </UserName>
+    </UserInfo>
+    <UserComment>
+      <h4>{review.title}</h4>
+      <p>{review.review}</p>
+    </UserComment>
+    <Stars>
+      <img src='/images/star.svg' alt='' />
+      <img src='/images/star.svg' alt='' />
+      <img src='/images/star.svg' alt='' />
+      <img src='/images/star.svg' alt='' />
+      <img src='/images/star.svg' alt='' />
+    </Stars>
+  </UserReview>
 ))
 
 function Home() {
@@ -176,6 +335,32 @@ function Home() {
         <Button coral>Shop Now</Button>
       </SectionOneContainer>
       <HomeNavigation second></HomeNavigation>
+      <UserReviews>{mappedReviews}</UserReviews>
+      <BlogSubscribe>
+        <h4>Love Harbor Products?</h4>
+        <p>Sign up with your email address to receive news and updates.</p>
+        <Button coral>Subscribe</Button>
+      </BlogSubscribe>
+      <BlogContainer>
+        <BlogImage>
+          <img
+            src='https://images.pexels.com/photos/17211655/pexels-photo-17211655/free-photo-of-green-doors-of-building-between-iron-flowerpots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+            alt=''
+          />
+        </BlogImage>
+        <BlogImage>
+          <img
+            src='https://images.pexels.com/photos/17211653/pexels-photo-17211653/free-photo-of-facade-of-white-building-with-doors-painted-grey.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+            alt=''
+          />
+        </BlogImage>
+        <BlogImage>
+          <img
+            src='https://images.pexels.com/photos/16550561/pexels-photo-16550561/free-photo-of-mountain-village-in-summer.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+            alt=''
+          />
+        </BlogImage>
+      </BlogContainer>
     </HomeContainer>
   )
 }
