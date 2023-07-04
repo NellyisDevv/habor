@@ -21,7 +21,7 @@ const DashContainer = styled.div`
 
 const TotalIncome = styled.div`
   /* background-color: lightgrey; */
-  background-color: #a3c9a3;
+  /* background-color: #a3c9a3; */
   position: relative;
   padding: 0em 0.9em;
 
@@ -48,8 +48,10 @@ const One = styled.div`
   }
 `
 
-const Detail = styled.div`
+const Detail = styled(Link)`
   /* background-color: lightblue; */
+  color: black;
+  text-decoration: none;
   position: absolute;
   top: 0;
   right: 0;
@@ -61,7 +63,7 @@ const Detail = styled.div`
 `
 
 const Review = styled.div`
-  background-color: #82c082;
+  /* background-color: #82c082; */
   padding: 2em 0.9em;
   display: flex;
   align-items: center;
@@ -95,6 +97,11 @@ const ListedContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-bottom: 1em;
+`
+
+const ViewAll = styled(Link)`
+  color: black;
+  text-decoration: none;
 `
 
 const Products = styled(Link)`
@@ -145,6 +152,15 @@ const ProductDetail = styled.div`
   }
 `
 
+const Bold = styled.span`
+  ${props =>
+    props.underline &&
+    css`
+      text-decoration: underline;
+    `}
+  font-weight: 600;
+`
+
 const mappedProducts = topProducts.map((van, index) => (
   <Products key={index} to={`products/${van.id}`}>
     <ProductInfo>
@@ -166,23 +182,27 @@ function Dashboard() {
       <TotalIncome>
         <One>
           <h2>Welcome</h2>
-          <p>Income last 30 days</p>
+          <p>
+            Income last <Bold underline>30 days</Bold>
+          </p>
           <h4>$2,260</h4>
-          <Detail>Detials</Detail>
+          <Detail to='/host/income'>Detials</Detail>
         </One>
       </TotalIncome>
       <Review>
         <h4>Review score</h4>
         <Rate>
           <img src='/images/star.svg' alt='' />
-          <p>5.0/5</p>
+          <p>
+            <Bold>5.0</Bold>/5
+          </p>
         </Rate>
-        <Detail>Detials</Detail>
+        <Detail to='/host/reviews'>Detials</Detail>
       </Review>
       <ListedProducts>
         <ListedContainer>
           <h4>Best selling products</h4>
-          <p>View all</p>
+          <ViewAll to='/host/products'>View all</ViewAll>
         </ListedContainer>
         {mappedProducts}
       </ListedProducts>

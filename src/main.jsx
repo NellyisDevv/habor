@@ -36,12 +36,13 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path='income' element={<Income />} />
             <Route path='products' element={<ProductsListed />} />
+            <Route path='reviews' element={<Reviews />} />
+
             <Route path='products/:id' element={<ProductsListedDetail />}>
               <Route index element={<SellerDetail />} />
               <Route path='pricing' element={<SellerPricing />} />
               <Route path='photos' element={<SellerPhotos />} />
             </Route>
-            <Route path='reviews' element={<Reviews />} />
           </Route>
         </Route>
       </Routes>

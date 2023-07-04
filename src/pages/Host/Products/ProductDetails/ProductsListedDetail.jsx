@@ -118,7 +118,7 @@ const LinkItem = styled(NavLink)`
   }
 `
 
-const BackToVans = styled.div`
+const BackToProducts = styled.div`
   padding: 1em 0.8em;
 `
 
@@ -148,9 +148,9 @@ function ProductsListedDetail() {
     <ProductContainer>
       {product ? (
         <div>
-          <BackToVans>
+          <BackToProducts>
             <LinkItem to={`/host/products`}>← Back to all products</LinkItem>
-          </BackToVans>
+          </BackToProducts>
           <ProductDetail>
             <img src={product.image} alt='' />
             <ProductKeyInfo>

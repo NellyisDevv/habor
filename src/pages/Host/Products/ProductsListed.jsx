@@ -96,12 +96,12 @@ const ListedContainer = styled.div`
   padding-bottom: 1em;
 
   h4 {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   @media ${device.sm} {
     h4 {
-      font-size: 1.5rem;
+      font-size: 1.7rem;
     }
   }
 `
@@ -109,6 +109,7 @@ const ListedContainer = styled.div`
 const Products = styled(Link)`
   padding: 1.2em;
   padding-right: 1.3em;
+  /* background-color: lightcoral; */
   /* display: flex;
   align-items: center;
   justify-content: space-between; */
@@ -125,10 +126,14 @@ const ProductInfo = styled.div`
   display: flex;
   gap: 0.5em;
   align-items: center;
+  margin-bottom: 0.8em;
   /* background-color: lightblue; */
+  width: 95%;
+  margin: auto;
 
   @media ${device.sm} {
     width: 100%;
+    margin-bottom: 0em;
   }
 `
 
