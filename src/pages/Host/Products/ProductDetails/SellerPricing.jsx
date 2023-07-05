@@ -2,7 +2,7 @@ import React from 'react'
 import { css } from 'styled-components'
 import styled from 'styled-components'
 import device from '../../../../../device'
-import { useParams, NavLink, Outlet } from 'react-router-dom'
+import { useParams, NavLink, Outlet, useOutletContext } from 'react-router-dom'
 import productsList from '../../../../data/productsList'
 
 const SellerDetails = styled.div`
@@ -23,20 +23,22 @@ const Details = styled.div`
 `
 
 function SellerPricing() {
-  const [product, setProduct] = React.useState(null)
+  const [product, setProduct] = useOutletContext()
 
-  const params = useParams()
-  const paramId = Number(params.id)
+  // const [product, setProduct] = React.useState(null)
 
-  const mappedProduct = productsList.map(product =>
-    product.id === paramId
-      ? React.useEffect(() => {
-          setProduct(product)
-        }, [paramId])
-      : null
-  )
+  // const params = useParams()
+  // const paramId = Number(params.id)
 
-  console.log(product)
+  // const mappedProduct = productsList.map(product =>
+  //   product.id === paramId
+  //     ? React.useEffect(() => {
+  //         setProduct(product)
+  //       }, [paramId])
+  //     : null
+  // )
+
+  // console.log(product)
 
   return (
     <SellerDetails>

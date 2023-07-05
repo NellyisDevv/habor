@@ -43,7 +43,7 @@ function SellerPhotos() {
       : null
   )
 
-  console.log(product)
+  // console.log(product)
 
   return (
     <SellerDetails>

@@ -194,7 +194,7 @@ function ProductsListedDetail() {
               Photos
             </LinkItem>
           </ProductNavigation>
-          <Outlet />
+          <Outlet context={[product, setProduct]} />
         </div>
       ) : (
         <div>
