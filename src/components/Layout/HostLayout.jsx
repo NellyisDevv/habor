@@ -55,7 +55,7 @@ function HostLayout() {
     <DashContainer>
       <DashLinks>
         <LinkItem
-          to='/host'
+          to='.'
           end
           // className={({ isActive }) => (isActive ? 'my-link' : null)}
           // className='my-link'
@@ -64,21 +64,24 @@ function HostLayout() {
           Dashboard
         </LinkItem>
         <LinkItem
-          to='/host/income'
+          // /host is already assumed meaning we dont need it
+          to='income'
           // className={({ isActive }) => (isActive ? 'my-link' : null)}
           style={({ isActive }) => (isActive ? activeStyles : null)}
         >
           Income
         </LinkItem>
         <LinkItem
-          to='/host/products'
+          // /host is already assumed meaning we dont need it
+          to='products'
           // className={({ isActive }) => (isActive ? 'my-link' : null)}
           style={({ isActive }) => (isActive ? activeStyles : null)}
         >
           Products
         </LinkItem>
         <LinkItem
-          to='/host/reviews'
+          // /host is already assumed meaning we dont need it
+          to='reviews'
           // className={({ isActive }) => (isActive ? 'my-link' : null)}
           style={({ isActive }) => (isActive ? activeStyles : null)}
         >

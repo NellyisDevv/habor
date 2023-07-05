@@ -1,9 +1,9 @@
 import React from 'react'
-import productsList from '../../../../data/productsList'
+import productsList from '../../data/productsList'
 import { useParams, NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import { css } from 'styled-components'
-import device from '../../../../../device'
+import device from '../../../device'
 
 const ProductContainer = styled.div`
   /* padding: 0em 0.9em; */
@@ -126,6 +126,7 @@ function ProductsListedDetail() {
   const [product, setProduct] = React.useState(null)
 
   const params = useParams()
+  // const { id } = useParams()
   const paramId = Number(params.id)
 
   const mappedProduct = productsList.map(product =>
@@ -149,7 +150,9 @@ function ProductsListedDetail() {
       {product ? (
         <div>
           <BackToProducts>
-            <LinkItem to={`/host/products`}>← Back to all products</LinkItem>
+            <LinkItem to={`..`} relative='path'>
+              ← Back to all products
+            </LinkItem>
           </BackToProducts>
           <ProductDetail>
             <img src={product.image} alt='' />
@@ -171,20 +174,21 @@ function ProductsListedDetail() {
           </ProductDetail>
           <ProductNavigation>
             <LinkItem
-              to={`/host/products/${paramId}`}
+              to={`.`}
               style={({ isActive }) => (isActive ? activeStyles : null)}
               end
             >
               Details
             </LinkItem>
             <LinkItem
-              to={`/host/products/${paramId}/pricing`}
+              // /host/products/${paramId}/ are already assumed by the parent routes
+              to={`pricing`}
               style={({ isActive }) => (isActive ? activeStyles : null)}
             >
               Pricing
             </LinkItem>
             <LinkItem
-              to={`/host/products/${paramId}/photos`}
+              to={`photos`}
               style={({ isActive }) => (isActive ? activeStyles : null)}
             >
               Photos

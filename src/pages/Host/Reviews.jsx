@@ -95,7 +95,7 @@ function Reviews() {
           <img src='/images/star.svg' alt='' />
         </StarRating>
         <UserRating>
-          <h3>Elliot</h3>
+          <h3>Noah</h3>
           <p>December 1, 2022</p>
         </UserRating>
         <UserReview>
@@ -116,14 +116,14 @@ function Reviews() {
           <img src='/images/star.svg' alt='' />
         </StarRating>
         <UserRating>
-          <h3>Sandy</h3>
+          <h3>Elijah</h3>
           <p>November 23, 2022</p>
         </UserRating>
         <UserReview>
           <p>
-            The Northern light candles are amazing, I love the materials they
-            use becuase they are very high quality which leads to a much cleaner
-            burn!
+            I'm in love with the selection of mens watches they are elegant and
+            affordable, I have people ask me all the time where I buy my
+            watches!
           </p>
         </UserReview>
         <Divider />

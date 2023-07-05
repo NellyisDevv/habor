@@ -12,7 +12,7 @@ const HomeContainer = styled.div`
 `
 
 const HomeNavigation = styled.div`
-  min-height: 93vh;
+  min-height: 90vh;
   width: 100%;
   background-image: url('https://images.pexels.com/photos/17211586/pexels-photo-17211586/free-photo-of-photographer-standing-on-street-under-green-building.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
   background-position: center center;
@@ -29,6 +29,92 @@ const HomeNavigation = styled.div`
       color: white;
       font-weight: 500;
     `}
+`
+
+const MidNavigation = styled.div`
+  /* background-color: lightblue; */
+  min-height: 40em;
+  max-width: 1500px;
+  /* width: 90%;
+  max-width: 310px; */
+  margin: auto;
+  display: grid;
+  gap: 1em;
+  width: 100%;
+  /* background-color: lightsalmon; */
+  color: white;
+  /* max-width: 1150px; */
+  padding: 1em;
+
+  @media ${device.sm} {
+    min-height: 30em;
+    grid-template-columns: 1fr 1fr;
+    /* min-width: 800px; */
+  }
+`
+
+const ScentsContainer = styled.div`
+  height: 30em;
+  display: flex;
+  justify-content: baseline;
+  align-items: end;
+  background-position: center;
+  background-size: cover;
+  padding: 1.5em;
+  background-image: url('https://images.pexels.com/photos/6794168/pexels-photo-6794168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+
+  @media ${device.sm} {
+    height: 40em;
+    grid-column: span 2;
+  }
+`
+
+const SkincareContainer = styled.div`
+  height: 30em;
+  display: flex;
+  justify-content: baseline;
+  align-items: end;
+  background-position: center;
+  background-size: cover;
+  padding: 1.5em;
+  background-image: url('https://images.pexels.com/photos/4210373/pexels-photo-4210373.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+
+  @media ${device.sm} {
+    height: 40em;
+  }
+`
+
+const WearablesContainer = styled.div`
+  height: 30em;
+  display: flex;
+  justify-content: baseline;
+  align-items: end;
+  background-position: center;
+  background-size: cover;
+  padding: 1.5em;
+  background-image: url('https://images.pexels.com/photos/17211584/pexels-photo-17211584/free-photo-of-city-landscape-fashion-man.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+
+  @media ${device.sm} {
+    height: 40em;
+  }
+`
+
+const Wearables = styled.div`
+  /* background-color: lightcoral; */
+
+  h2 {
+    font-size: 1.9rem;
+    margin-bottom: 0.25em;
+  }
+
+  button {
+    border: none;
+    /* max-width: 200px; */
+    padding: 0.4em 1em;
+    font-size: 1rem;
+    background-color: #456828;
+    color: white;
+  }
 `
 
 const Hero = styled.div`
@@ -94,7 +180,7 @@ const MobileBreak = styled.br`
 `
 
 const SectionOneContainer = styled.div`
-  min-height: 63vh;
+  min-height: 60vh;
   /* max-width: 1400px;
   margin: auto; */
   display: flex;
@@ -102,7 +188,7 @@ const SectionOneContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 4em;
-  padding: 3em 2em 3em 2em;
+  padding: 3em 2em 2em 2em;
 
   h2 {
     font-size: 1.8rem;
@@ -334,7 +420,26 @@ function Home() {
         <SectionTwo>{mappedProducts}</SectionTwo>
         <Button coral>Shop Now</Button>
       </SectionOneContainer>
-      <HomeNavigation second></HomeNavigation>
+      <MidNavigation>
+        <WearablesContainer>
+          <Wearables>
+            <h2>Wearables</h2>
+            <button>View All</button>
+          </Wearables>
+        </WearablesContainer>
+        <SkincareContainer>
+          <Wearables>
+            <h2>Skincare</h2>
+            <button>View All</button>
+          </Wearables>
+        </SkincareContainer>
+        <ScentsContainer>
+          <Wearables>
+            <h2>Scents</h2>
+            <button>View All</button>
+          </Wearables>
+        </ScentsContainer>
+      </MidNavigation>
       <UserReviews>{mappedReviews}</UserReviews>
       <BlogSubscribe>
         <h4>Love Harbor Products?</h4>
