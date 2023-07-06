@@ -141,22 +141,28 @@ const BtnContainer = styled.div`
 `
 
 const Button = styled(Link)`
-  text-align: center;
-  background-color: #3f3f3f;
+  background-color: #456828;
   color: white;
+  text-align: center;
   text-decoration: none;
   font-size: 0.9rem;
   padding: 0.8em;
-  border: none;
   width: 8em;
   border-radius: 0.05em;
+  transition: 400ms all cubic-bezier(0.4, 0, 0.2, 1);
 
   ${props =>
     props.coral &&
     css`
-      background-color: #456828;
+      background-color: transparent;
       color: white;
+      border: 1px solid white;
       font-weight: 500;
+
+      &:hover {
+        background-color: white;
+        color: black;
+      }
     `}
 
   @media ${device.md} {
@@ -246,7 +252,7 @@ const BlogSubscribe = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 5em;
+  margin-bottom: 4em;
   margin-top: 2em;
 
   h4 {
@@ -403,10 +409,10 @@ function Home() {
             Luxary <MobileBreak /> Perfected
           </H2>
           <BtnContainer>
-            <Button coral to='/shop'>
-              Shop Now
+            <Button to='/shop'>Shop Now</Button>
+            <Button coral to='/about'>
+              Learn More
             </Button>
-            <Button to='/about'>Learn More</Button>
           </BtnContainer>
         </Hero>
       </HomeNavigation>
@@ -418,7 +424,7 @@ function Home() {
           </p>
         </SectionOne>
         <SectionTwo>{mappedProducts}</SectionTwo>
-        <Button coral>Shop Now</Button>
+        <Button to='shop'>Shop Now</Button>
       </SectionOneContainer>
       <MidNavigation>
         <WearablesContainer>
@@ -444,7 +450,7 @@ function Home() {
       <BlogSubscribe>
         <h4>Love Harbor Products?</h4>
         <p>Sign up with your email address to receive news and updates.</p>
-        <Button coral>Subscribe</Button>
+        <Button>Subscribe</Button>
       </BlogSubscribe>
       <BlogContainer>
         <BlogImage>

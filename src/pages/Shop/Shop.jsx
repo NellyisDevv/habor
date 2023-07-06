@@ -11,14 +11,8 @@ const ProductContainer = styled.div`
 `
 
 const Products = styled.div`
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap; */
   display: grid;
   justify-items: center;
-  /* justify-content: center;
-  align-items: center; */
   width: 90%;
   max-width: 1400px;
   margin: auto;
@@ -61,7 +55,7 @@ const ButtonContainer = styled.div`
   flex-wrap: wrap;
 `
 
-const Button = styled(Link)`
+const Button = styled.button`
   text-decoration: none;
   border: none;
   color: white;
@@ -69,23 +63,36 @@ const Button = styled(Link)`
   font-size: 0.9rem;
   border-radius: 0.05em;
   cursor: pointer;
+  transition: 400ms all cubic-bezier(0.4, 0, 0.2, 1);
 
   ${props =>
     props.skin &&
     css`
       background-color: lightcoral;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     `}
 
   ${props =>
     props.scent &&
     css`
       background-color: lightslategrey;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     `}
 
     ${props =>
     props.wear &&
     css`
       background-color: lightsalmon;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     `}
 `
 
@@ -135,16 +142,19 @@ function Shop() {
       <Explore>
         <h2>Explore our product options</h2>
         <ButtonContainer>
-          <Button to='?type=skincare' skin>
+          <Button onClick={() => setSearchParams({ type: 'skincare' })} skin>
+            {/* to='?type=skincare' */}
             Skincare
           </Button>
-          <Button to='?type=scents' scent>
+          <Button onClick={() => setSearchParams({ type: 'scents' })} scent>
+            {/* to='?type=scents' */}
             Scents
           </Button>
-          <Button to='?type=wearables' wear>
+          <Button onClick={() => setSearchParams({ type: 'wearables' })} wear>
             Wearables
           </Button>
-          <P to='.'>Clear filters</P>
+          <P onClick={() => setSearchParams({})}>Clear filters</P>
+          {/* to='.' */}
         </ButtonContainer>
       </Explore>
       <Products>{mappedProducts}</Products>

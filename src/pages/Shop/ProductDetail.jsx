@@ -13,28 +13,11 @@ const DetailContainer = styled.div`
   align-items: center;
 `
 
-// const ProductListing = styled.div`
-//   width: 100%;
-//   max-width: 1300px;
-//   margin: auto;
-//   padding: 2em;
-//   display: flex;
-//   flex-wrap: wrap;
-//   /* display: grid; */
-//   /* background-color: lightskyblue; */
-
-//   @media ${device.md} {
-//     width: 90%;
-//     padding: 4em;
-//   }
-// `
-
 const ProductListing = styled.div`
   padding: 3em 1em;
   display: grid;
   align-items: center;
   gap: 0em;
-  /* background-color: lightblue; */
 
   @media ${device.md} {
     grid-template-columns: repeat(2, 1fr);
@@ -46,13 +29,8 @@ const ProductImage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: lightpink; */
-  /* width: 100%;
-  max-width: 580px; */
   height: 30em;
   margin: auto;
-
-  /* padding: 1em; */
 
   img {
     width: 100%; /* or any custom size */
@@ -62,15 +40,6 @@ const ProductImage = styled.div`
 `
 
 const ProductInfo = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  gap: 1.3em;
-  background-color: lightgreen;
-  overflow: scroll;
-  padding: 1em;
-  width: 28em;
-  margin: auto; */
-  /* background-color: lightgreen; */
   display: grid;
   gap: 1em;
   justify-content: center;
@@ -94,7 +63,6 @@ const Input = styled.input`
 `
 
 const ImagePreview = styled.div`
-  /* background-color: lightgoldenrodyellow; */
   height: 100%;
   cursor: pointer;
   display: none;
