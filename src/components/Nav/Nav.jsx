@@ -84,7 +84,7 @@ function Nav() {
     <Container>
       <Burger />
       <HeaderContainer>
-        <H1 to='/'>Habor</H1>
+        <H1 to='/'>Minazia</H1>
       </HeaderContainer>
       <CartContainer>
         <Login

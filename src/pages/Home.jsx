@@ -448,7 +448,7 @@ function Home() {
       </MidNavigation>
       <UserReviews>{mappedReviews}</UserReviews>
       <BlogSubscribe>
-        <h4>Love Harbor Products?</h4>
+        <h4>Love Minazia Products?</h4>
         <p>Sign up with your email address to receive news and updates.</p>
         <Button>Subscribe</Button>
       </BlogSubscribe>
