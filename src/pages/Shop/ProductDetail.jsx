@@ -13,18 +13,32 @@ const DetailContainer = styled.div`
   align-items: center;
 `
 
+// const ProductListing = styled.div`
+//   width: 100%;
+//   max-width: 1300px;
+//   margin: auto;
+//   padding: 2em;
+//   display: flex;
+//   flex-wrap: wrap;
+//   /* display: grid; */
+//   /* background-color: lightskyblue; */
+
+//   @media ${device.md} {
+//     width: 90%;
+//     padding: 4em;
+//   }
+// `
+
 const ProductListing = styled.div`
-  width: 100%;
-  max-width: 1300px;
-  margin: auto;
-  padding: 2em;
-  display: flex;
-  flex-wrap: wrap;
-  /* background-color: lightskyblue; */
+  padding: 3em 1em;
+  display: grid;
+  align-items: center;
+  gap: 0em;
+  /* background-color: lightblue; */
 
   @media ${device.md} {
-    width: 90%;
-    padding: 4em;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
   }
 `
 
@@ -33,9 +47,11 @@ const ProductImage = styled.div`
   justify-content: center;
   align-items: center;
   /* background-color: lightpink; */
-  width: 28em;
+  /* width: 100%;
+  max-width: 580px; */
+  height: 30em;
   margin: auto;
-  height: 28em;
+
   /* padding: 1em; */
 
   img {
@@ -46,14 +62,20 @@ const ProductImage = styled.div`
 `
 
 const ProductInfo = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   gap: 1.3em;
-  /* background-color: lightgreen; */
+  background-color: lightgreen;
   overflow: scroll;
   padding: 1em;
   width: 28em;
-  margin: auto;
+  margin: auto; */
+  /* background-color: lightgreen; */
+  display: grid;
+  gap: 1em;
+  justify-content: center;
+  padding: 1em;
+  max-width: 550px;
 `
 
 const Button = styled(Link)`

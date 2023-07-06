@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import device from '../../../device'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import '/server'
 import Product from '../../components/Product'
 
@@ -11,18 +11,30 @@ const ProductContainer = styled.div`
 `
 
 const Products = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
+  display: grid;
+  justify-items: center;
+  /* justify-content: center;
+  align-items: center; */
   width: 90%;
   max-width: 1400px;
   margin: auto;
-  gap: 3em;
+  gap: 2em;
   /* background-color: lightgreen; */
   padding: 1em;
   margin-top: 3em;
   margin-bottom: 4em;
+
+  @media ${device.md} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media ${device.lg} {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 `
 
 const Explore = styled.div`
@@ -86,6 +98,12 @@ const P = styled(Link)`
 
 function Shop() {
   const [products, setProducts] = React.useState([])
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const typeFilter = searchParams.get('type')
+
+  // console.log(searchParams.toString())
+  // console.log(searchParams.get('type'))
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -97,7 +115,11 @@ function Shop() {
     fetchData()
   }, [])
 
-  const mappedProducts = products.map(product => (
+  const displayedProducts = typeFilter
+    ? products.filter(product => product.type.toLowerCase() === typeFilter)
+    : products
+
+  const mappedProducts = displayedProducts.map(product => (
     <Product
       key={product.id}
       id={product.id}
@@ -113,10 +135,16 @@ function Shop() {
       <Explore>
         <h2>Explore our product options</h2>
         <ButtonContainer>
-          <Button skin>Skincare</Button>
-          <Button scent>Scents</Button>
-          <Button wear>Wearables</Button>
-          <P>Clear filters</P>
+          <Button to='?type=skincare' skin>
+            Skincare
+          </Button>
+          <Button to='?type=scents' scent>
+            Scents
+          </Button>
+          <Button to='?type=wearables' wear>
+            Wearables
+          </Button>
+          <P to='.'>Clear filters</P>
         </ButtonContainer>
       </Explore>
       <Products>{mappedProducts}</Products>

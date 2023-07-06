@@ -4,14 +4,13 @@ import { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 
 function Product({ name, price, description, imageUrl, id }) {
-  var length = 53
+  var length = 50
   var myString = name
   var myTruncatedString = myString.substring(0, length)
 
   const ProductImage = styled.img`
     height: 15em;
     object-fit: contain;
-    /* background-color: lightcoral; */
   `
 
   const ProductContainer = styled(Link)`
@@ -26,6 +25,7 @@ function Product({ name, price, description, imageUrl, id }) {
     padding: 1em;
     gap: 1em;
     cursor: pointer;
+    /* border: 1px solid #8f96a3; */
 
     h2 {
       font-weight: 500;

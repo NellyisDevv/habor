@@ -30,7 +30,7 @@ createServer({
       description: ` Each of our Fossil mens' watches are built to last and embody the bold, creative spirit of their wearers. Through quality craftsmanship, premium features and a keen attention to detail, our watches are made for the everyday-wearer, the adventurer and everyone in between. `,
       imageUrl:
         'https://m.media-amazon.com/images/I/71ijx2DmebL._AC_UX679_.jpg',
-      type: 'wearable',
+      type: 'wearables',
     })
     server.create('product', {
       id: '4',
@@ -39,7 +39,7 @@ createServer({
       description:
         'Dreamfinder is the perfect van to travel in and experience. With a ceiling height of 2.1m, you can stand up in this van and there is great head room. The floor is a beautiful glass-reinforced plastic (GRP) which is easy to clean and very hard wearing. A large rear window and large side windows make it really light inside and keep it well ventilated.',
       imageUrl: 'https://m.media-amazon.com/images/I/71yK4bkSg-L._SL1500_.jpg',
-      type: 'simple',
+      type: 'skincare',
     })
     server.create('product', {
       id: '5',
@@ -49,7 +49,7 @@ createServer({
         'The Cruiser is a van for those who love to travel in comfort and luxury. With its many windows, spacious interior and ample storage space, the Cruiser offers a beautiful view wherever you go.',
       imageUrl:
         'https://m.media-amazon.com/images/I/71b5MtBvL6L._AC_UX679_.jpg',
-      type: 'luxury',
+      type: 'wearables',
     })
     server.create('product', {
       id: '6',
@@ -59,7 +59,7 @@ createServer({
         "With this van, you can take your travel life to the next level. The Green Wonder is a sustainable vehicle that's perfect for people who are looking for a stylish, eco-friendly mode of transport that can go anywhere.",
       imageUrl:
         'https://m.media-amazon.com/images/I/61m7SQDw7iL._AC_SL1500_.jpg',
-      type: 'rugged',
+      type: 'scents',
     }),
       server.create('product', {
         id: '7',
@@ -89,7 +89,7 @@ createServer({
           "CLASSIC ITALIAN STYLE - Add a dash of glam to your everyday look with this 18K gold over sterling silver 5mm Mesh bracelet. Simple interlocking links create a flexible movement and shiny finish for a modern and polished look. Domed in form, it is not too chunky, with just the right volume for a cool feminine silhouette. It's the perfect bracelet for daily wear, whether with casual jeans and t-shirt or a dressy attire. ",
         imageUrl:
           'https://m.media-amazon.com/images/I/61q-Rdo0QUL._AC_UX679_.jpg',
-        type: 'wearable',
+        type: 'wearables',
       })
   },
 
