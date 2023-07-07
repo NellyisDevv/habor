@@ -73,7 +73,7 @@ const Form = styled.form`
   width: 100%;
 
   input {
-    padding: 0.5em;
+    padding: 0.6em;
     /* border-radius: 0.5em; */
     width: 100%;
   }

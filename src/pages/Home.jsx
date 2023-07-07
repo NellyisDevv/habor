@@ -310,6 +310,12 @@ const BlogContainer = styled.div`
 
 const BlogImage = styled.div`
   min-height: 150px;
+  transition: 400ms all cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.01);
+  }
 
   img {
     width: 100%;
