@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import { Link } from 'react-router-dom'
+import device from '../../device'
 
 function Product({ name, price, description, imageUrl, id }) {
   var length = 50
@@ -21,7 +22,7 @@ function Product({ name, price, description, imageUrl, id }) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 18em;
+    width: 16em;
     padding: 1em;
     gap: 1em;
     cursor: pointer;
@@ -30,6 +31,10 @@ function Product({ name, price, description, imageUrl, id }) {
     h2 {
       font-weight: 500;
       font-size: 1rem;
+    }
+
+    @media ${device.sm} {
+      width: 18em;
     }
   `
 

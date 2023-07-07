@@ -6,7 +6,7 @@ import device from '../../device'
 const FooterContainer = styled.div`
   background-color: #456828;
   color: white;
-  min-height: 19vh;
+  min-height: 27vh;
   display: flex;
   align-items: center;
   font-family: 'poppins', sans-serif;

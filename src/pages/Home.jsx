@@ -53,7 +53,9 @@ const MidNavigation = styled.div`
   }
 `
 
-const ScentsContainer = styled.div`
+const ScentsContainer = styled(Link)`
+  color: white;
+  text-decoration: none;
   height: 30em;
   display: flex;
   justify-content: baseline;
@@ -62,6 +64,12 @@ const ScentsContainer = styled.div`
   background-size: cover;
   padding: 1.5em;
   background-image: url('https://images.pexels.com/photos/6794168/pexels-photo-6794168.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  transition: 400ms all cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.01);
+  }
 
   @media ${device.sm} {
     height: 40em;
@@ -69,7 +77,9 @@ const ScentsContainer = styled.div`
   }
 `
 
-const SkincareContainer = styled.div`
+const SkincareContainer = styled(Link)`
+  color: white;
+  text-decoration: none;
   height: 30em;
   display: flex;
   justify-content: baseline;
@@ -78,13 +88,21 @@ const SkincareContainer = styled.div`
   background-size: cover;
   padding: 1.5em;
   background-image: url('https://images.pexels.com/photos/4210373/pexels-photo-4210373.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  transition: 400ms all cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.01);
+  }
 
   @media ${device.sm} {
     height: 40em;
   }
 `
 
-const WearablesContainer = styled.div`
+const WearablesContainer = styled(Link)`
+  color: white;
+  text-decoration: none;
   height: 30em;
   display: flex;
   justify-content: baseline;
@@ -93,6 +111,12 @@ const WearablesContainer = styled.div`
   background-size: cover;
   padding: 1.5em;
   background-image: url('https://images.pexels.com/photos/17211584/pexels-photo-17211584/free-photo-of-city-landscape-fashion-man.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  transition: 400ms all cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.01);
+  }
 
   @media ${device.sm} {
     height: 40em;
@@ -114,6 +138,7 @@ const Wearables = styled.div`
     font-size: 1rem;
     background-color: #456828;
     color: white;
+    cursor: pointer;
   }
 `
 
@@ -427,19 +452,19 @@ function Home() {
         <Button to='shop'>Shop Now</Button>
       </SectionOneContainer>
       <MidNavigation>
-        <WearablesContainer>
+        <WearablesContainer to='shop?type=wearables'>
           <Wearables>
             <h2>Wearables</h2>
             <button>View All</button>
           </Wearables>
         </WearablesContainer>
-        <SkincareContainer>
+        <SkincareContainer to='shop?type=skincare'>
           <Wearables>
             <h2>Skincare</h2>
             <button>View All</button>
           </Wearables>
         </SkincareContainer>
-        <ScentsContainer>
+        <ScentsContainer to='shop?type=scents'>
           <Wearables>
             <h2>Scents</h2>
             <button>View All</button>
