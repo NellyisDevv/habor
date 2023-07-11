@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import device from '../../../device'
-import { Link, useLoaderData, useSearchParams } from 'react-router-dom'
-import '/server'
+import { Link, useSearchParams, useLoaderData } from 'react-router-dom'
+// import '/server'
 import Product from '../../components/Product'
 import { getProducts } from '../../../api'
 
@@ -129,11 +129,12 @@ export function loader() {
 
 export default function Shop() {
   // const [products, setProducts] = React.useState([])
-  const [searchParams, setSearchParams] = useSearchParams()
   // const [loading, setLoading] = React.useState(false)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [error, setError] = React.useState(null)
+  const products = useLoaderData()
 
   const typeFilter = searchParams.get('type')
-  const products = useLoaderData()
 
   // console.log(searchParams.toString())
   // console.log(searchParams.get('type'))
@@ -188,6 +189,10 @@ export default function Shop() {
   //     </LoadingState>
   //   )
   // }
+
+  if (error) {
+    return <h1>There was an error: {error.message}</h1>
+  }
 
   return (
     <ProductContainer>

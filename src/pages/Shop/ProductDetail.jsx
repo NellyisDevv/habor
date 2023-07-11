@@ -171,7 +171,7 @@ function ProductDetail() {
               <p>Quantity:</p>
               <Input value={1} min='1' max='10' step='1' type='number' />
             </form>
-            <Button>Add To Cart</Button>
+            <Button to='/cart'>Add To Cart</Button>
           </ProductInfo>
         </ProductListing>
       ) : (
