@@ -66,25 +66,25 @@ const RightNav = ({ open }) => {
   return (
     <Ul open={open}>
       <NavLinks
-        to='/about'
+        to='about'
         style={({ isActive }) => (isActive ? activeStyles : null)}
       >
         About
       </NavLinks>
       <NavLinks
-        to='/shop'
+        to='shop'
         style={({ isActive }) => (isActive ? activeStyles : null)}
       >
         Shop
       </NavLinks>
       <NavLinks
-        to='/host'
+        to='host'
         style={({ isActive }) => (isActive ? activeStyles : null)}
       >
         Host
       </NavLinks>
       <NavLinks
-        to='/login'
+        to='login'
         style={({ isActive }) => (isActive ? activeStyles : null)}
       >
         {open

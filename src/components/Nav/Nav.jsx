@@ -88,12 +88,12 @@ function Nav() {
       </HeaderContainer>
       <CartContainer>
         <Login
-          to='/login'
+          to='login'
           style={({ isActive }) => (isActive ? activeStyles : null)}
         >
           Login
         </Login>
-        <Cart to='/cart'>
+        <Cart to='cart'>
           <CartImage src='/cart-black.svg' />
           <p>0</p>
         </Cart>

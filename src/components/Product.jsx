@@ -4,7 +4,7 @@ import { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import device from '../../device'
 
-function Product({ name, price, description, imageUrl, id }) {
+function Product({ name, price, imageUrl, id, typeFilter, filter }) {
   var length = 50
   var myString = name
   var myTruncatedString = myString.substring(0, length)
@@ -50,7 +50,11 @@ function Product({ name, price, description, imageUrl, id }) {
   `
 
   return (
-    <ProductContainer to={`/shop/${id}`}>
+    // This line not working!
+    <ProductContainer
+      to={`/shop/${id}`}
+      state={{ search: typeFilter.toString(), type: filter }}
+    >
       <ProductImage src={imageUrl} alt='' />
       <ProductInfo>
         {' '}

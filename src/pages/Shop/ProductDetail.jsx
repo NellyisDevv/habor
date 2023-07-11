@@ -1,14 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 import device from '../../../device'
 import '/server'
+import { getProducts } from '../../../api'
 
 const DetailContainer = styled.div`
   font-family: 'poppins', sans-serif;
-  min-height: 75vh;
+  min-height: 67vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `
@@ -17,11 +19,10 @@ const ProductListing = styled.div`
   padding: 3em 1em;
   display: grid;
   align-items: center;
-  gap: 0em;
+  gap: 1em;
 
-  @media ${device.md} {
+  @media ${device.lg} {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1em;
   }
 `
 
@@ -29,13 +30,17 @@ const ProductImage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30em;
+  height: 20em;
   margin: auto;
 
   img {
     width: 100%; /* or any custom size */
     height: 100%;
     object-fit: contain;
+  }
+
+  @media ${device.sm} {
+    height: 30em;
   }
 `
 
@@ -79,9 +84,41 @@ const ImagePreview = styled.div`
   }
 `
 
+const Return = styled.div`
+  /* background-color: lightblue; */
+  width: 100%;
+  padding: 2em 0.9em;
+
+  @media ${device.sm} {
+    padding: 2em 4.5em;
+    width: 90%;
+  }
+`
+
+const ReturnLink = styled(Link)`
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
 function ProductDetail() {
   const params = useParams()
   const [product, setProduct] = React.useState(null)
+  const location = useLocation()
+
+  const previousFilter = location.state.search
+
+  console.log(location)
+
+  // optional chaining
+  // const search = location.state?.search || ''
+
+  // original method
+  // const search = location.state && location.state.search || ''
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -93,8 +130,31 @@ function ProductDetail() {
     fetchData()
   }, [params.id])
 
+  let filterMessage = ''
+
+  if (previousFilter === 'type=wearables') {
+    filterMessage = '← Back to all wearables'
+  } else if (previousFilter === 'type=scents') {
+    filterMessage = '← Back to all scents'
+  } else if (previousFilter === 'type=skincare') {
+    filterMessage = '← Back to all skincare'
+  } else {
+    filterMessage = '← Back to all products'
+  }
+
+  const type = location.state?.type || 'products'
+
   return (
     <DetailContainer>
+      <Return>
+        <ReturnLink
+          to={previousFilter ? `/shop?${previousFilter}` : '..'}
+          relative='path'
+        >
+          {/* {previousFilter ? '← Back to all products' : 'something'} */}
+          {/* {filterMessage} */}← Back to all {type}
+        </ReturnLink>
+      </Return>
       {product ? (
         <ProductListing>
           <ProductImage>
