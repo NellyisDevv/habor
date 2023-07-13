@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { css } from 'styled-components'
+import imageUrl from '/images/m-test.png'
 import styled from 'styled-components'
 import device from '../../device'
 
@@ -90,6 +91,7 @@ const InputTwo = styled.input`
   border: 1px solid #d2d2d7;
   border-bottom-right-radius: 0.6em;
   border-bottom-left-radius: 0.6em;
+  margin-bottom: 1.5em;
 `
 
 const Direct = styled.span`
@@ -99,20 +101,51 @@ const Direct = styled.span`
 `
 
 function Login() {
+  const [loginFormData, setLoginFormData] = React.useState({
+    email: '',
+    password: '',
+  })
+
+  function handleChange(e) {
+    const { name, value } = e.target
+
+    setLoginFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log(loginFormData)
+  }
+
   return (
     <LoginContainer>
       <LoginForm>
         <FormContent>
-          <img src='/images/m-test.png' alt='' />
+          <img src={imageUrl} alt='Site Logo' />
           <h2>Sign in</h2>
           <p>
             New to Minazia? <Direct>Sign up for free</Direct>
           </p>
-          <Form action=''>
-            <InputOne type='email' placeholder='email' />
-            <InputTwo type='password' placeholder='password' />
+          <Form onSubmit={handleSubmit}>
+            <InputOne
+              name='email'
+              value={loginFormData.email}
+              onChange={handleChange}
+              type='email'
+              placeholder='email'
+            />
+            <InputTwo
+              name='password'
+              value={loginFormData.password}
+              onChange={handleChange}
+              type='password'
+              placeholder='password'
+            />
+            <button>Sign in</button>
           </Form>
-          <button>Sign in</button>
           <p>
             <Direct>Forgot Minazia Password?</Direct>
           </p>
