@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
-import { useParams, Link, useLocation } from 'react-router-dom'
+import { useParams, Link, useLocation, useLoaderData } from 'react-router-dom'
 import device from '../../../device'
 import '/server'
 import { getProducts } from '../../../api'
@@ -105,14 +105,19 @@ const ReturnLink = styled(Link)`
   }
 `
 
+export function loader() {
+  return getProducts()
+}
+
 function ProductDetail() {
   const params = useParams()
   const [product, setProduct] = React.useState(null)
   const location = useLocation()
+  const productDetail = useLoaderData()
 
   const previousFilter = location.state.search
 
-  console.log(location)
+  // console.log(location)
 
   // optional chaining
   // const search = location.state?.search || ''
@@ -120,27 +125,35 @@ function ProductDetail() {
   // original method
   // const search = location.state && location.state.search || ''
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(`/api/products/${params.id}`)
-      let data = await res.json()
-      setProduct(data.products)
-    }
+  // React.useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await fetch(`/api/products/${params.id}`)
+  //     let data = await res.json()
+  //     setProduct(data.products)
+  //   }
 
-    fetchData()
-  }, [params.id])
+  //   fetchData()
+  // }, [params.id])
 
-  let filterMessage = ''
+  productDetail.map(product =>
+    product.id === params.id
+      ? React.useEffect(() => {
+          setProduct(product)
+        }, [params.id])
+      : null
+  )
 
-  if (previousFilter === 'type=wearables') {
-    filterMessage = '← Back to all wearables'
-  } else if (previousFilter === 'type=scents') {
-    filterMessage = '← Back to all scents'
-  } else if (previousFilter === 'type=skincare') {
-    filterMessage = '← Back to all skincare'
-  } else {
-    filterMessage = '← Back to all products'
-  }
+  // let filterMessage = ''
+
+  // if (previousFilter === 'type=wearables') {
+  //   filterMessage = '← Back to all wearables'
+  // } else if (previousFilter === 'type=scents') {
+  //   filterMessage = '← Back to all scents'
+  // } else if (previousFilter === 'type=skincare') {
+  //   filterMessage = '← Back to all skincare'
+  // } else {
+  //   filterMessage = '← Back to all products'
+  // }
 
   const type = location.state?.type || 'products'
 

@@ -8,11 +8,14 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
+  redirect,
 } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 import Shop, { loader as shopPageLoader } from './pages/Shop/Shop'
-import ProductDetail from './pages/Shop/ProductDetail'
+import ProductDetail, {
+  loader as productDetailLoader,
+} from './pages/Shop/ProductDetail'
 import Dashboard from './pages/Host/Dashboard'
 import Income from './pages/Host/Income'
 import Reviews from './pages/Host/Reviews'
@@ -35,20 +38,72 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path='about' element={<About />} />
       <Route path='shop' element={<Shop />} loader={shopPageLoader} />
-      <Route path='shop/:id' element={<ProductDetail />} />
+      <Route
+        path='shop/:id'
+        element={<ProductDetail />}
+        loader={productDetailLoader}
+      />
       <Route path='login' element={<Login />} />
       <Route path='cart' element={<Cart />} />
 
       <Route path='host' element={<HostLayout />}>
-        <Route index element={<Dashboard />} />
-        <Route path='income' element={<Income />} />
-        <Route path='products' element={<ProductsListed />} />
-        <Route path='reviews' element={<Reviews />} />
+        <Route
+          index
+          element={<Dashboard />}
+          loader={async () => {
+            return null
+          }}
+        />
+        <Route
+          path='income'
+          element={<Income />}
+          loader={async () => {
+            return null
+          }}
+        />
+        <Route
+          path='products'
+          element={<ProductsListed />}
+          loader={async () => {
+            return null
+          }}
+        />
+        <Route
+          path='reviews'
+          element={<Reviews />}
+          loader={async () => {
+            return null
+          }}
+        />
 
-        <Route path='products/:id' element={<ProductsListedDetail />}>
-          <Route index element={<SellerDetail />} />
-          <Route path='pricing' element={<SellerPricing />} />
-          <Route path='photos' element={<SellerPhotos />} />
+        <Route
+          path='products/:id'
+          element={<ProductsListedDetail />}
+          loader={async () => {
+            return null
+          }}
+        >
+          <Route
+            index
+            element={<SellerDetail />}
+            loader={async () => {
+              return null
+            }}
+          />
+          <Route
+            path='pricing'
+            element={<SellerPricing />}
+            loader={async () => {
+              return null
+            }}
+          />
+          <Route
+            path='photos'
+            element={<SellerPhotos />}
+            loader={async () => {
+              return null
+            }}
+          />
         </Route>
       </Route>
 

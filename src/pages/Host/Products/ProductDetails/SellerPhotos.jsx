@@ -2,7 +2,7 @@ import React from 'react'
 import { css } from 'styled-components'
 import styled from 'styled-components'
 import device from '../../../../../device'
-import { useParams, NavLink, Outlet } from 'react-router-dom'
+import { useParams, NavLink, Outlet, useOutletContext } from 'react-router-dom'
 import productsList from '../../../../data/productsList'
 
 const SellerDetails = styled.div`
