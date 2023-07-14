@@ -1,9 +1,10 @@
 import React from 'react'
 import productsList from '../../data/productsList'
-import { useParams, NavLink, Outlet } from 'react-router-dom'
+import { useParams, NavLink, Outlet, useLoaderData } from 'react-router-dom'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import device from '../../../device'
+import { getHostProducts } from '../../../api'
 
 const ProductContainer = styled.div`
   /* padding: 0em 0.9em; */
@@ -122,20 +123,25 @@ const BackToProducts = styled.div`
   padding: 1em 0.8em;
 `
 
+export function loader({ params }) {
+  return getHostProducts(params.id)
+}
+
 function ProductsListedDetail() {
-  const [product, setProduct] = React.useState(null)
+  // const [product, setProduct] = React.useState(null)
+  const product = useLoaderData()
 
-  const params = useParams()
+  // const params = useParams()
   // const { id } = useParams()
-  const paramId = Number(params.id)
+  // const paramId = Number(params.id)
 
-  const mappedProduct = productsList.map(product =>
-    product.id === paramId
-      ? React.useEffect(() => {
-          setProduct(product)
-        }, [paramId])
-      : null
-  )
+  // const mappedProduct = productsList.map(product =>
+  //   product.id === paramId
+  //     ? React.useEffect(() => {
+  //         setProduct(product)
+  //       }, [paramId])
+  //     : null
+  // )
 
   // console.log(product)
 
@@ -155,20 +161,20 @@ function ProductsListedDetail() {
             </LinkItem>
           </BackToProducts>
           <ProductDetail>
-            <img src={product.image} alt='' />
+            <img src={product.imageUrl} alt='' />
             <ProductKeyInfo>
-              {product.type === 'Scents' ? (
+              {product.type === 'scents' ? (
                 <Button scents>{product.type}</Button>
-              ) : product.type === 'Skincare' ? (
+              ) : product.type === 'skincare' ? (
                 <Button skincare>{product.type}</Button>
-              ) : product.type === 'Wearables' ? (
+              ) : product.type === 'wearables' ? (
                 <Button wearables>{product.type}</Button>
               ) : (
                 <div>
                   <h1>No Button Found!</h1>
                 </div>
               )}
-              <h1>{product.name}</h1>
+              <h1>{product.shortName}</h1>
               <h2>${product.price}</h2>
             </ProductKeyInfo>
           </ProductDetail>
@@ -194,7 +200,8 @@ function ProductsListedDetail() {
               Photos
             </LinkItem>
           </ProductNavigation>
-          <Outlet context={[product, setProduct]} />
+          {/* <Outlet context={[product, setProduct]} /> */}
+          <Outlet context={[product]} />
         </div>
       ) : (
         <div>

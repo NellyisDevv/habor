@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLoaderData } from 'react-router-dom'
 import { css } from 'styled-components'
 import styled from 'styled-components'
 import device from '../../../../device'
 import productsList from '../../../data/productsList'
+import { getHostProducts } from '../../../../api'
 import '/server'
 
 const DashContainer = styled.div`
@@ -164,21 +165,41 @@ const ProductDetail = styled.div`
   /* background-color: lightcoral; */
 `
 
-const mappedProducts = productsList.map((van, index) => (
-  <Products key={index} to={`${van.id}`}>
-    <ProductInfo>
-      <ProductImg>
-        <img src={van.image} alt='' />
-      </ProductImg>
-      <ProductDetail>
-        <h5>{van.name}</h5>
-        <p>${van.price}</p>
-      </ProductDetail>
-    </ProductInfo>
-  </Products>
-))
+// const mappedProducts = productsList.map((van, index) => (
+//   <Products key={index} to={`${van.id}`}>
+//     <ProductInfo>
+//       <ProductImg>
+//         <img src={van.image} alt='' />
+//       </ProductImg>
+//       <ProductDetail>
+//         <h5>{van.name}</h5>
+//         <p>${van.price}</p>
+//       </ProductDetail>
+//     </ProductInfo>
+//   </Products>
+// ))
+
+export function loader() {
+  return getHostProducts()
+}
 
 function ProductsListed() {
+  const products = useLoaderData()
+
+  const listedProductsElements = products.map((product, index) => (
+    <Products key={index} to={`${product.id}`}>
+      <ProductInfo>
+        <ProductImg>
+          <img src={product.imageUrl} alt='' />
+        </ProductImg>
+        <ProductDetail>
+          <h5>{product.shortName}</h5>
+          <p>${product.price}</p>
+        </ProductDetail>
+      </ProductInfo>
+    </Products>
+  ))
+
   return (
     <DashContainer>
       <ListedProducts>
@@ -186,7 +207,8 @@ function ProductsListed() {
           <h4>Your listed products</h4>
           {/* <p>View all</p> */}
         </ListedContainer>
-        {mappedProducts}
+        {/* {mappedProducts} */}
+        {listedProductsElements}
       </ListedProducts>
     </DashContainer>
   )

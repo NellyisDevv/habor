@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLoaderData } from 'react-router-dom'
 import { css } from 'styled-components'
 import styled from 'styled-components'
 import device from '../../../device'
-import vansList from '../../data/vansList'
 import productsList from '../../data/productsList'
 import topProducts from '../../data/topProducts'
+import { getHostProducts } from '../../../api'
 
 const DashContainer = styled.div`
   /* background-color: #7fbd7f; */
@@ -161,22 +161,46 @@ const Bold = styled.span`
   font-weight: 600;
 `
 
-const mappedProducts = topProducts.map((van, index) => (
-  <Products key={index} to={`products/${van.id}`}>
-    <ProductInfo>
-      <ProductImg>
-        <img src={van.image} alt='' />
-      </ProductImg>
-      <ProductDetail>
-        <h5>{van.name}</h5>
-        <p>${van.price}</p>
-      </ProductDetail>
-    </ProductInfo>
-    <h6>Edit</h6>
-  </Products>
-))
+// const mappedProducts = topProducts.map((van, index) => (
+//   <Products key={index} to={`products/${van.id}`}>
+//     <ProductInfo>
+//       <ProductImg>
+//         <img src={van.image} alt='' />
+//       </ProductImg>
+//       <ProductDetail>
+//         <h5>{van.name}</h5>
+//         <p>${van.price}</p>
+//       </ProductDetail>
+//     </ProductInfo>
+//     <h6>Edit</h6>
+//   </Products>
+// ))
+
+export function loader() {
+  return getHostProducts()
+}
 
 function Dashboard() {
+  const products = useLoaderData()
+  // console.log(products)
+
+  const bestSellerElements = products.map((product, index) =>
+    product.bestSeller ? (
+      <Products key={index} to={`products/${product.id}`}>
+        <ProductInfo>
+          <ProductImg>
+            <img src={product.imageUrl} alt='' />
+          </ProductImg>
+          <ProductDetail>
+            <h5>{product.shortName}</h5>
+            <p>${product.price}</p>
+          </ProductDetail>
+        </ProductInfo>
+        <h6>Edit</h6>
+      </Products>
+    ) : null
+  )
+
   return (
     <DashContainer>
       <TotalIncome>
@@ -204,7 +228,8 @@ function Dashboard() {
           <h4>Best selling products</h4>
           <ViewAll to='/host/products'>View all</ViewAll>
         </ListedContainer>
-        {mappedProducts}
+        {/* {mappedProducts} */}
+        {bestSellerElements}
       </ListedProducts>
       <Outlet />
     </DashContainer>

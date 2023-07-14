@@ -105,15 +105,16 @@ const ReturnLink = styled(Link)`
   }
 `
 
-export function loader() {
-  return getProducts()
+export function loader({ params }) {
+  // console.log(params)
+  return getProducts(params.id)
 }
 
 function ProductDetail() {
   const params = useParams()
-  const [product, setProduct] = React.useState(null)
+  // const [product, setProduct] = React.useState(null)
   const location = useLocation()
-  const productDetail = useLoaderData()
+  const product = useLoaderData()
 
   const previousFilter = location.state.search
 
@@ -135,13 +136,13 @@ function ProductDetail() {
   //   fetchData()
   // }, [params.id])
 
-  productDetail.map(product =>
-    product.id === params.id
-      ? React.useEffect(() => {
-          setProduct(product)
-        }, [params.id])
-      : null
-  )
+  // productDetail.map(product =>
+  //   product.id === params.id
+  //     ? React.useEffect(() => {
+  //         setProduct(product)
+  //       }, [params.id])
+  //     : null
+  // )
 
   // let filterMessage = ''
 

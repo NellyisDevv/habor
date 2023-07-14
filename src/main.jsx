@@ -16,7 +16,9 @@ import Shop, { loader as shopPageLoader } from './pages/Shop/Shop'
 import ProductDetail, {
   loader as productDetailLoader,
 } from './pages/Shop/ProductDetail'
-import Dashboard from './pages/Host/Dashboard'
+import Dashboard, {
+  loader as dashboardPageLoader,
+} from './pages/Host/Dashboard'
 import Income from './pages/Host/Income'
 import Reviews from './pages/Host/Reviews'
 import Layout from './components/Layout/Layout'
@@ -24,8 +26,12 @@ import HostLayout from './components/Layout/HostLayout'
 import Products from './pages/Host/Products/ProductsListed'
 import Login from './pages/Login'
 import Cart from './pages/Cart'
-import ProductsListed from './pages/Host/Products/ProductsListed'
-import ProductsListedDetail from './components/Layout/ProductsListedLayout'
+import ProductsListed, {
+  loader as productsListedLoader,
+} from './pages/Host/Products/ProductsListed'
+import ProductsListedDetail, {
+  loader as productsListedDetailLoader,
+} from './components/Layout/ProductsListedLayout'
 import SellerDetail from './pages/Host/Products/ProductDetails/SellerDetail'
 import SellerPricing from './pages/Host/Products/ProductDetails/SellerPricing'
 import SellerPhotos from './pages/Host/Products/ProductDetails/SellerPhotos'
@@ -47,13 +53,7 @@ const router = createBrowserRouter(
       <Route path='cart' element={<Cart />} />
 
       <Route path='host' element={<HostLayout />}>
-        <Route
-          index
-          element={<Dashboard />}
-          loader={async () => {
-            return null
-          }}
-        />
+        <Route index element={<Dashboard />} loader={dashboardPageLoader} />
         <Route
           path='income'
           element={<Income />}
@@ -64,9 +64,7 @@ const router = createBrowserRouter(
         <Route
           path='products'
           element={<ProductsListed />}
-          loader={async () => {
-            return null
-          }}
+          loader={productsListedLoader}
         />
         <Route
           path='reviews'
@@ -79,9 +77,7 @@ const router = createBrowserRouter(
         <Route
           path='products/:id'
           element={<ProductsListedDetail />}
-          loader={async () => {
-            return null
-          }}
+          loader={productsListedDetailLoader}
         >
           <Route
             index

@@ -42,15 +42,9 @@ function SellerPricing() {
 
   return (
     <SellerDetails>
-      {product ? (
-        <Details>
-          <h1>${product.price}</h1>
-        </Details>
-      ) : (
-        <div>
-          <h1>Loading...</h1>
-        </div>
-      )}
+      <Details>
+        <h1>${product.price}</h1>
+      </Details>
     </SellerDetails>
   )
 }

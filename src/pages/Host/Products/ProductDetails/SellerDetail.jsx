@@ -68,7 +68,7 @@ function SellerDetail() {
         <Details>
           <Name>
             <p>
-              <Bold>Name:</Bold> {product.name}
+              <Bold>Name:</Bold> {product.shortName}
             </p>
           </Name>
           <Description>

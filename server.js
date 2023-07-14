@@ -9,61 +9,77 @@ createServer({
     server.create('product', {
       id: '1',
       name: 'Bulldog Mens Skincare and Grooming Body Wash, Peppermint and Eucalyptus, 16.9 Fluid Ounce',
+      shortName: 'Bulldog Mens Body Wash',
       price: `7.40`,
       description: ` Minty and invigorating, this is the ultimate post-gym body wash. This refreshing treat is not at all drying yet will leave you feeling as clean as a whistle. Pop one of these in your gym bag and keep it in your bathroom after a sweaty commute home from work (we've even tested it on hair in case you've forgotten your shampoo!). `,
       imageUrl: 'https://m.media-amazon.com/images/I/61Zolb7mjNL._SL1500_.jpg',
       type: 'skincare',
+      hostId: '123',
+      bestSeller: true,
     })
     server.create('product', {
       id: '2',
       name: 'Northern Lights Candles Whiskey and Tobacco Spirit Candle',
+      shortName: 'Northern Lights Candles',
       price: `8.99`,
       description: ` Northern lights Spirit Jar candles honor craft cocktails and your preferred bottle of wine. This line combines the perfect measure of fragrance with unique color and all natural cork lid. The back of each candle has a snappy snippet for informative spirits related tidbits. `,
       imageUrl:
         'https://m.media-amazon.com/images/I/81FLCJ+utHL._AC_SL1500_.jpg',
       type: 'scents',
+      hostId: '123',
+      bestSeller: true,
     })
     server.create('product', {
       id: '3',
       name: `Fossil Minimalist Men's Watch with Leather or Stainless Steel Band`,
+      shortName: "Fossil Minimalist Men's Watch",
       price: `80.75`,
       description: ` Each of our Fossil mens' watches are built to last and embody the bold, creative spirit of their wearers. Through quality craftsmanship, premium features and a keen attention to detail, our watches are made for the everyday-wearer, the adventurer and everyone in between. `,
       imageUrl:
         'https://m.media-amazon.com/images/I/71ijx2DmebL._AC_UX679_.jpg',
       type: 'wearables',
+      hostId: '123',
+      bestSeller: true,
     })
     server.create('product', {
       id: '4',
       name: 'New York Biology Dead Sea Mud Mask for Face and Body - Spa Quality Pore Reducer for Acne, Blackheads and Oily Skin, Natural Skincare for Women, Men - Tightens Skin for A Healthier Complexion - 8.8 oz',
+      shortName: 'New York Biology Dead Sea Mud Mask',
       price: `11.28`,
       description:
         'Dreamfinder is the perfect van to travel in and experience. With a ceiling height of 2.1m, you can stand up in this van and there is great head room. The floor is a beautiful glass-reinforced plastic (GRP) which is easy to clean and very hard wearing. A large rear window and large side windows make it really light inside and keep it well ventilated.',
       imageUrl: 'https://m.media-amazon.com/images/I/71yK4bkSg-L._SL1500_.jpg',
       type: 'skincare',
+      hostId: '123',
     })
     server.create('product', {
       id: '5',
       name: `Fossil Townsman Men's Watch with Chronograph Display and Genuine Leather Band`,
+      shortName: "Fossil Townsman Men's Watch",
       price: `81.22`,
       description:
         'The Cruiser is a van for those who love to travel in comfort and luxury. With its many windows, spacious interior and ample storage space, the Cruiser offers a beautiful view wherever you go.',
       imageUrl:
         'https://m.media-amazon.com/images/I/71b5MtBvL6L._AC_UX679_.jpg',
       type: 'wearables',
+      hostId: '123',
     })
     server.create('product', {
       id: '6',
       name: 'Gifts for Dad Fathers Day Birthday Gifts from Daughter Son, Sandalwood Scented Candles for Christmas, Thanksgiving Day, Birthday Gift for Men Him Daddy Step Dad ',
+      shortName: 'Sandalwood Scented Candles',
       price: `13.99`,
       description:
         "With this van, you can take your travel life to the next level. The Green Wonder is a sustainable vehicle that's perfect for people who are looking for a stylish, eco-friendly mode of transport that can go anywhere.",
       imageUrl:
         'https://m.media-amazon.com/images/I/61m7SQDw7iL._AC_SL1500_.jpg',
       type: 'scents',
+      hostId: '123',
     }),
       server.create('product', {
         id: '7',
         name: `Gold Bond Men's Essentials Everyday Moisture Daily Body & Hand Lotion, 14.5 oz., With Vitamin C`,
+        shortName: "Gold Bond Men's Lotion",
         price: `13.99`,
         description:
           "Gold Bond Men's Essentials Everyday Moisture Lotion for body and hands is formulated specifically for men with dry skin. It's made with seven moisturizers three vitamins to replenish, hydrate and soften men's skin. This daily moisturizing formula for men also contains vitamin C, an antioxidant that helps protect skin against environmental stressors. What's more, Gold Bond Everyday Moisture Lotion for men is hypoallergenic, dermatologist-tested, fast-absorbing and nongreasy. Stock up on 14.5-ounce bottles of Gold Bond Men's Essentials Everyday Moisture so you always have nourishing hydration on hand when you need it most.",
@@ -74,6 +90,7 @@ createServer({
       server.create('product', {
         id: '8',
         name: `Candles for Men, Palo Santo Candle, Patchouli Candles, Soy Scented Candles for Home Scented, Black Candles, Mens Candle for Home, Man Candles, Masculine Candle, Aromatherapy Non Toxic Candles – 9oz`,
+        shortName: 'Palo Santo Candle',
         price: `24.95`,
         description:
           'Best Candles for Men: Looking for scented candles for men? Wax & Wit has you covered with the perfect gifts for him. This candle comes with a strong masculine scent and a stylish black design. Perfect gift for mens home decor and bathroom candles! ',
@@ -105,6 +122,16 @@ createServer({
     this.get('/products/:id', (schema, request) => {
       const id = request.params.id
       return schema.products.find(id)
+    })
+
+    this.get('/host/products', (schema, request) => {
+      // Hard-code the hostId for now
+      return schema.products.where({ hostId: '123' })
+    })
+
+    this.get('/host/products/:id', (schema, request) => {
+      const id = request.params.id
+      return schema.products.findBy({ id, hostId: 123 })
     })
   },
 })
