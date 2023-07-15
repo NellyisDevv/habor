@@ -13,6 +13,7 @@ import device from '../../../device'
 import '/server'
 import { getProducts } from '../../../api'
 import { Context } from '../../main'
+// import { Context } from '../../main'
 
 const DetailContainer = styled.div`
   font-family: 'poppins', sans-serif;
@@ -65,6 +66,8 @@ const Form = styled.form`
 `
 
 const Button = styled.button`
+  border: none;
+  cursor: pointer;
   background-color: #456828;
   color: white;
   padding: 1em;
@@ -129,29 +132,30 @@ function ProductDetail() {
   const location = useLocation()
   const product = useLoaderData()
   const [formData, setFormData] = React.useState({
+    ...product,
     quantity: 1,
   })
-  const [allProducts, setAllProducts] = useContext(Context)
-
-  console.log(allProducts)
-
-  function changeData() {
-    setAllProducts(formData)
-    console.log(allProducts)
-  }
+  const [cartItems, setCartItems] = useContext(Context)
 
   function handleChange(e) {
     const { name, value } = e.target
 
     setFormData(prevState => ({
       ...prevState,
-      [name]: value,
+      [name]: Number(value),
     }))
+
+    // setCurrentProduct(prev => [{ ...prev }, formData])
   }
 
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(formData)
+    // cartItems.push({ id: 'one', name: 'Nelly' })
+    cartItems.push(formData)
+    console.log(cartItems)
+    // console.log(cartItems)
+    // setAllProducts(formData)
+    // console.log(currentProduct)
   }
 
   // console.log(location)
@@ -231,8 +235,8 @@ function ProductDetail() {
                 step='1'
                 type='number'
               />
+              <Button>Add To Cart</Button>
             </Form>
-            <Button onClick={() => changeData()}>Add To Cart</Button>
           </ProductInfo>
         </ProductListing>
       ) : (

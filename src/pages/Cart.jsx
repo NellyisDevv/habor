@@ -5,6 +5,7 @@ import { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import device from '../../device'
 import { Context } from '../main'
+// import { Context } from '../main'
 
 const CartComponent = styled.div`
   min-height: 67vh;
@@ -28,6 +29,27 @@ const CartContainer = styled.div`
   }
 `
 
+const CartItems = styled.div`
+  /* background-color: #7fbd7f; */
+  margin: auto;
+  font-family: 'poppins', sans-serif;
+
+  @media ${device.sm} {
+    padding: 2em 4em;
+    /* background-color: lightgoldenrodyellow; */
+  }
+`
+
+const CartItem = styled.div`
+  /* background-color: lightcyan; */
+  display: flex;
+
+  img {
+    height: 8em;
+    width: 8em;
+  }
+`
+
 const Button = styled(Link)`
   background-color: #456828;
   color: white;
@@ -38,12 +60,21 @@ const Button = styled(Link)`
 `
 
 function Cart() {
-  const [allProducts, setAllProducts] = useContext(Context)
+  // const [allProducts, setAllProducts] = useContext(Context)
+  // console.log(allProducts)
+  const [cartItems] = useContext(Context)
+  console.log(cartItems)
 
-  console.log(allProducts)
-
-  // Conditionally render if there is something in the cart meaning that allProducts is not NULL then we will show the cart view with the data about the product
-  return (
+  return cartItems.length > 0 ? (
+    cartItems.map(item => (
+      <CartItems>
+        <CartItem>
+          <img src={item.imageUrl} alt='' />
+          <h1>{item.shortName}</h1>
+        </CartItem>
+      </CartItems>
+    ))
+  ) : (
     <CartComponent>
       <CartContainer>
         <h1>Shopping Cart</h1>

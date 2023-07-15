@@ -112,10 +112,22 @@ const router = createBrowserRouter(
 export const Context = React.createContext()
 
 function App() {
-  const [allProducts, setAllProducts] = React.useState('')
+  const [cartItems, setCartItems] = React.useState([
+    // {
+    //   id: '1',
+    //   name: 'Bulldog Mens Skincare and Grooming Body Wash, Peppermint and Eucalyptus, 16.9 Fluid Ounce',
+    //   shortName: 'Bulldog Mens Body Wash',
+    //   price: `7.40`,
+    //   description: ` Minty and invigorating, this is the ultimate post-gym body wash. This refreshing treat is not at all drying yet will leave you feeling as clean as a whistle. Pop one of these in your gym bag and keep it in your bathroom after a sweaty commute home from work (we've even tested it on hair in case you've forgotten your shampoo!). `,
+    //   imageUrl: 'https://m.media-amazon.com/images/I/61Zolb7mjNL._SL1500_.jpg',
+    //   type: 'skincare',
+    //   hostId: '123',
+    //   bestSeller: true,
+    // },
+  ])
 
   return (
-    <Context.Provider value={[allProducts, setAllProducts]}>
+    <Context.Provider value={[cartItems, setCartItems]}>
       <RouterProvider router={router} />
     </Context.Provider>
   )
