@@ -1,10 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
-import { useParams, Link, useLocation, useLoaderData } from 'react-router-dom'
+import { useContext } from 'react'
+import {
+  useParams,
+  Link,
+  useLocation,
+  useLoaderData,
+  Outlet,
+} from 'react-router-dom'
 import device from '../../../device'
 import '/server'
 import { getProducts } from '../../../api'
+import { Context } from '../../main'
 
 const DetailContainer = styled.div`
   font-family: 'poppins', sans-serif;
@@ -49,10 +57,14 @@ const ProductInfo = styled.div`
   gap: 1em;
   justify-content: center;
   padding: 1em;
-  max-width: 550px;
+  max-width: 520px;
 `
 
-const Button = styled(Link)`
+const Form = styled.form`
+  display: grid;
+`
+
+const Button = styled.button`
   background-color: #456828;
   color: white;
   padding: 1em;
@@ -65,6 +77,7 @@ const Input = styled.input`
   padding: 1.5em;
   width: 8em;
   margin-top: 0.6em;
+  margin-bottom: 1.8em;
 `
 
 const ImagePreview = styled.div`
@@ -111,12 +124,35 @@ export function loader({ params }) {
 }
 
 function ProductDetail() {
-  const params = useParams()
+  // const params = useParams()
   // const [product, setProduct] = React.useState(null)
   const location = useLocation()
   const product = useLoaderData()
+  const [formData, setFormData] = React.useState({
+    quantity: 1,
+  })
+  const [allProducts, setAllProducts] = useContext(Context)
 
-  const previousFilter = location.state.search
+  console.log(allProducts)
+
+  function changeData() {
+    setAllProducts(formData)
+    console.log(allProducts)
+  }
+
+  function handleChange(e) {
+    const { name, value } = e.target
+
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }))
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log(formData)
+  }
 
   // console.log(location)
 
@@ -157,6 +193,9 @@ function ProductDetail() {
   // }
 
   const type = location.state?.type || 'products'
+  const previousFilter = location.state?.search || ''
+  // const previousFilter = location.state?.serach || 'products'
+  // const previousFilter = location.state.search
 
   return (
     <DetailContainer>
@@ -181,11 +220,19 @@ function ProductDetail() {
             <h2>{product.name}</h2>
             <h4>${product.price}</h4>
             <p>{product.description}</p>
-            <form action=''>
+            <Form onSubmit={handleSubmit}>
               <p>Quantity:</p>
-              <Input value={1} min='1' max='10' step='1' type='number' />
-            </form>
-            <Button to='/cart'>Add To Cart</Button>
+              <Input
+                onChange={handleChange}
+                name='quantity'
+                value={formData.quantity}
+                min='1'
+                max='10'
+                step='1'
+                type='number'
+              />
+            </Form>
+            <Button onClick={() => changeData()}>Add To Cart</Button>
           </ProductInfo>
         </ProductListing>
       ) : (

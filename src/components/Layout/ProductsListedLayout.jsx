@@ -127,7 +127,7 @@ export function loader({ params }) {
   return getHostProducts(params.id)
 }
 
-function ProductsListedDetail() {
+function ProductsListedLayout() {
   // const [product, setProduct] = React.useState(null)
   const product = useLoaderData()
 
@@ -212,4 +212,4 @@ function ProductsListedDetail() {
   )
 }
 
-export default ProductsListedDetail
+export default ProductsListedLayout

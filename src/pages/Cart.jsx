@@ -1,8 +1,10 @@
 import React from 'react'
+import { useContext } from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import device from '../../device'
+import { Context } from '../main'
 
 const CartComponent = styled.div`
   min-height: 67vh;
@@ -36,6 +38,11 @@ const Button = styled(Link)`
 `
 
 function Cart() {
+  const [allProducts, setAllProducts] = useContext(Context)
+
+  console.log(allProducts)
+
+  // Conditionally render if there is something in the cart meaning that allProducts is not NULL then we will show the cart view with the data about the product
   return (
     <CartComponent>
       <CartContainer>

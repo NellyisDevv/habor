@@ -29,8 +29,8 @@ import Cart from './pages/Cart'
 import ProductsListed, {
   loader as productsListedLoader,
 } from './pages/Host/Products/ProductsListed'
-import ProductsListedDetail, {
-  loader as productsListedDetailLoader,
+import ProductsListedLayout, {
+  loader as productsListedLayoutLoader,
 } from './components/Layout/ProductsListedLayout'
 import SellerDetail from './pages/Host/Products/ProductDetails/SellerDetail'
 import SellerPricing from './pages/Host/Products/ProductDetails/SellerPricing'
@@ -44,13 +44,14 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path='about' element={<About />} />
       <Route path='shop' element={<Shop />} loader={shopPageLoader} />
+      <Route path='login' element={<Login />} />
+      <Route path='cart' element={<Cart />} />
+
       <Route
         path='shop/:id'
         element={<ProductDetail />}
         loader={productDetailLoader}
       />
-      <Route path='login' element={<Login />} />
-      <Route path='cart' element={<Cart />} />
 
       <Route path='host' element={<HostLayout />}>
         <Route index element={<Dashboard />} loader={dashboardPageLoader} />
@@ -76,8 +77,8 @@ const router = createBrowserRouter(
 
         <Route
           path='products/:id'
-          element={<ProductsListedDetail />}
-          loader={productsListedDetailLoader}
+          element={<ProductsListedLayout />}
+          loader={productsListedLayoutLoader}
         >
           <Route
             index
@@ -108,8 +109,16 @@ const router = createBrowserRouter(
   )
 )
 
+export const Context = React.createContext()
+
 function App() {
-  return <RouterProvider router={router} />
+  const [allProducts, setAllProducts] = React.useState('')
+
+  return (
+    <Context.Provider value={[allProducts, setAllProducts]}>
+      <RouterProvider router={router} />
+    </Context.Provider>
+  )
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
