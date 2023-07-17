@@ -3,7 +3,6 @@ import { Link, useLoaderData } from 'react-router-dom'
 import { getHostProducts } from '../../../api'
 import styled from 'styled-components'
 import device from '../../../device'
-import { requireAuth } from '../../../utils'
 
 const DashContainer = styled.div`
   margin: auto;
@@ -81,8 +80,7 @@ const ProductImg = styled.div`
 
 const ProductDetail = styled.div``
 
-export async function loader() {
-  await requireAuth()
+export function loader() {
   return getHostProducts()
 }
 

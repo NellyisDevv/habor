@@ -3,8 +3,6 @@ import { Link, Outlet, useLoaderData } from 'react-router-dom'
 import { css } from 'styled-components'
 import styled from 'styled-components'
 import device from '../../../device'
-import productsList from '../../data/productsList'
-import topProducts from '../../data/topProducts'
 import { getHostProducts } from '../../../api'
 import { requireAuth } from '../../../utils'
 
@@ -163,7 +161,7 @@ const Bold = styled.span`
 `
 
 export async function loader() {
-  await requireAuth()
+  // await requireAuth()
   return getHostProducts()
 }
 

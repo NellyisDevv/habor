@@ -100,11 +100,16 @@ const Direct = styled.span`
   cursor: pointer;
 `
 
-function Login() {
+export default function Login() {
   const [loginFormData, setLoginFormData] = React.useState({
     email: '',
     password: '',
   })
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log(loginFormData)
+  }
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -113,11 +118,6 @@ function Login() {
       ...prev,
       [name]: value,
     }))
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    console.log(loginFormData)
   }
 
   return (
@@ -154,5 +154,3 @@ function Login() {
     </LoginContainer>
   )
 }
-
-export default Login

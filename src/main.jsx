@@ -35,6 +35,7 @@ import Error from './components/Error'
 import { requireAuth } from '../utils'
 import Cart from './pages/Cart'
 import '../index.css'
+import AuthRequired from './components/AuthRequired'
 
 import '../server'
 
@@ -57,44 +58,26 @@ const router = createBrowserRouter(
         loader={productDetailLoader}
       />
 
-      <Route path='host' element={<HostLayout />}>
-        <Route index element={<Dashboard />} loader={dashboardLoader} />
-        <Route
-          path='income'
-          element={<Income />}
-          loader={async () => requireAuth()}
-        />
-        <Route
-          path='reviews'
-          element={<Reviews />}
-          loader={async () => requireAuth()}
-        />
-        <Route
-          path='products'
-          element={<HostProducts />}
-          loader={hostProductsLoader}
-        />
+      <Route element={<AuthRequired />}>
+        <Route path='host' element={<HostLayout />}>
+          <Route index element={<Dashboard />} loader={dashboardLoader} />
+          <Route path='income' element={<Income />} />
+          <Route path='reviews' element={<Reviews />} />
+          <Route
+            path='products'
+            element={<HostProducts />}
+            loader={hostProductsLoader}
+          />
 
-        <Route
-          path='products/:id'
-          element={<HostProductDetail />}
-          loader={hostProductDetailLoader}
-        >
           <Route
-            index
-            element={<HostProductInfo />}
-            loader={async () => requireAuth()}
-          />
-          <Route
-            path='pricing'
-            element={<HostProductPricing />}
-            loader={async () => requireAuth()}
-          />
-          <Route
-            path='photos'
-            element={<HostProductPhotos />}
-            loader={async () => requireAuth()}
-          />
+            path='products/:id'
+            element={<HostProductDetail />}
+            loader={hostProductDetailLoader}
+          >
+            <Route index element={<HostProductInfo />} />
+            <Route path='pricing' element={<HostProductPricing />} />
+            <Route path='photos' element={<HostProductPhotos />} />
+          </Route>
         </Route>
       </Route>
       <Route path='*' element={<NotFound />} />
