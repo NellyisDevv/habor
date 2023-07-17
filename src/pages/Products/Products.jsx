@@ -185,9 +185,9 @@ export default function Products() {
           <Button onClick={() => setSearchParams({ type: 'wearables' })} wear>
             Wearables
           </Button>
-          {typeFilter && (
+          {typeFilter ? (
             <P onClick={() => setSearchParams({})}>Clear filters</P>
-          )}{' '}
+          ) : null}
         </ButtonContainer>
       </Explore>
       <ProductsContainer>{productElements}</ProductsContainer>

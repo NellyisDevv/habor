@@ -86,7 +86,7 @@ const IncomeTransactions = styled.div`
   padding: 1em 0em;
 `
 
-function Income() {
+export default function Income() {
   return (
     <IncomeContainer>
       <IncomeStats>
@@ -123,5 +123,3 @@ function Income() {
     </IncomeContainer>
   )
 }
-
-export default Income

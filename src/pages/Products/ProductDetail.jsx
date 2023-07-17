@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
-import { useContext } from 'react'
 import {
   useParams,
   Link,
@@ -12,8 +11,6 @@ import {
 import device from '../../../device'
 import '/server'
 import { getProducts } from '../../../api'
-import { Context } from '../../main'
-// import { Context } from '../../main'
 
 const DetailContainer = styled.div`
   font-family: 'poppins', sans-serif;
@@ -135,7 +132,6 @@ function ProductDetail() {
     ...product,
     quantity: 1,
   })
-  const [cartItems, setCartItems] = useContext(Context)
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -212,36 +208,33 @@ function ProductDetail() {
           {/* {filterMessage} */}← Back to all {type}
         </ReturnLink>
       </Return>
-      {product ? (
-        <ProductListing>
-          <ProductImage>
-            <ImagePreview>
-              {/* <img src={product.imageUrl} alt='' /> */}
-            </ImagePreview>
-            <img src={product.imageUrl} alt='' />
-          </ProductImage>
-          <ProductInfo>
-            <h2>{product.name}</h2>
-            <h4>${product.price}</h4>
-            <p>{product.description}</p>
-            <Form onSubmit={handleSubmit}>
-              <p>Quantity:</p>
-              <Input
-                onChange={handleChange}
-                name='quantity'
-                value={formData.quantity}
-                min='1'
-                max='10'
-                step='1'
-                type='number'
-              />
-              <Button>Add To Cart</Button>
-            </Form>
-          </ProductInfo>
-        </ProductListing>
-      ) : (
-        <h2>Loading...</h2>
-      )}
+
+      <ProductListing>
+        <ProductImage>
+          <ImagePreview>
+            {/* <img src={product.imageUrl} alt='' /> */}
+          </ImagePreview>
+          <img src={product.imageUrl} alt='' />
+        </ProductImage>
+        <ProductInfo>
+          <h2>{product.name}</h2>
+          <h4>${product.price}</h4>
+          <p>{product.description}</p>
+          <Form onSubmit={handleSubmit}>
+            <p>Quantity:</p>
+            <Input
+              onChange={handleChange}
+              name='quantity'
+              value={formData.quantity}
+              min='1'
+              max='10'
+              step='1'
+              type='number'
+            />
+            <Button>Add To Cart</Button>
+          </Form>
+        </ProductInfo>
+      </ProductListing>
     </DetailContainer>
   )
 }

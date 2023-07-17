@@ -1,12 +1,9 @@
 import React from 'react'
-import { useContext } from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import { Link, useLoaderData } from 'react-router-dom'
 import device from '../../device'
-import { Context } from '../main'
 import { getProducts } from '../../api'
-// import { Context } from '../main'
 
 const CartComponent = styled.div`
   min-height: 67vh;
@@ -61,26 +58,8 @@ const Button = styled(Link)`
   cursor: pointer;
 `
 
-export function loader() {
-  return getProducts()
-}
-
 function Cart() {
-  // const [allProducts, setAllProducts] = useContext(Context)
-  // console.log(allProducts)
-  const [cartItems, setCartItems] = useContext(Context)
-  // console.log(cartItems)
-
-  return cartItems.length > 0 ? (
-    cartItems.map(item => (
-      <CartItems>
-        <CartItem>
-          <img src={item.imageUrl} alt='' />
-          <h1>{item.shortName}</h1>
-        </CartItem>
-      </CartItems>
-    ))
-  ) : (
+  return (
     <CartComponent>
       <CartContainer>
         <h1>Shopping Cart</h1>

@@ -8,7 +8,7 @@ export default [
     alt: '',
   },
   {
-    img: '/bulldog2.png',
+    img: '/images/hims-cleanser.png',
     alt: '',
   },
 ]

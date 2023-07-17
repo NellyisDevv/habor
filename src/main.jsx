@@ -7,7 +7,6 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-  redirect,
   Link,
 } from 'react-router-dom'
 import Home from './pages/Home'
@@ -45,6 +44,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path='about' element={<About />} />
       <Route path='login' element={<Login />} />
+      <Route path='cart' element={<Cart />} />
       <Route
         path='shop'
         element={<Products />}
@@ -56,27 +56,18 @@ const router = createBrowserRouter(
         element={<ProductDetail />}
         loader={productDetailLoader}
       />
-      <Route path='cart' element={<Cart />} />
 
       <Route path='host' element={<HostLayout />}>
-        <Route
-          index
-          element={<Dashboard />}
-          loader={async () => await requireAuth()}
-        />
+        <Route index element={<Dashboard />} loader={dashboardLoader} />
         <Route
           path='income'
           element={<Income />}
-          loader={async () => {
-            return null
-          }}
+          loader={async () => requireAuth()}
         />
         <Route
           path='reviews'
           element={<Reviews />}
-          loader={async () => {
-            return null
-          }}
+          loader={async () => requireAuth()}
         />
         <Route
           path='products'
@@ -92,23 +83,17 @@ const router = createBrowserRouter(
           <Route
             index
             element={<HostProductInfo />}
-            loader={async () => {
-              return null
-            }}
+            loader={async () => requireAuth()}
           />
           <Route
             path='pricing'
             element={<HostProductPricing />}
-            loader={async () => {
-              return null
-            }}
+            loader={async () => requireAuth()}
           />
           <Route
             path='photos'
             element={<HostProductPhotos />}
-            loader={async () => {
-              return null
-            }}
+            loader={async () => requireAuth()}
           />
         </Route>
       </Route>
@@ -117,16 +102,8 @@ const router = createBrowserRouter(
   )
 )
 
-export const Context = React.createContext()
-
 function App() {
-  const [cartItems, setCartItems] = React.useState([])
-
-  return (
-    <Context.Provider value={[cartItems, setCartItems]}>
-      <RouterProvider router={router} />
-    </Context.Provider>
-  )
+  return <RouterProvider router={router} />
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)

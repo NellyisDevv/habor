@@ -162,23 +162,8 @@ const Bold = styled.span`
   font-weight: 600;
 `
 
-// const mappedProducts = topProducts.map((van, index) => (
-//   <Products key={index} to={`products/${van.id}`}>
-//     <ProductInfo>
-//       <ProductImg>
-//         <img src={van.image} alt='' />
-//       </ProductImg>
-//       <ProductDetail>
-//         <h5>{van.name}</h5>
-//         <p>${van.price}</p>
-//       </ProductDetail>
-//     </ProductInfo>
-//     <h6>Edit</h6>
-//   </Products>
-// ))
-
 export async function loader() {
-  // await requireAuth()
+  await requireAuth()
   return getHostProducts()
 }
 

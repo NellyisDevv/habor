@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { css } from 'styled-components'
 import device from '../../../device'
 import { getHostProducts } from '../../../api'
+import { requireAuth } from '../../../utils'
 
 const ProductContainer = styled.div`
   min-height: 64vh;
@@ -118,7 +119,8 @@ const BackToProducts = styled.div`
   padding: 1em 0.8em;
 `
 
-export function loader({ params }) {
+export async function loader({ params }) {
+  await requireAuth()
   return getHostProducts(params.id)
 }
 

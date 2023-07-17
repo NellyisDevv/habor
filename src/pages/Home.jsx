@@ -404,8 +404,21 @@ const Stars = styled.div`
   padding: 0em 1em 1.3em 1em;
 `
 
+const QualityItems = styled.div`
+  background-color: lightblue;
+  height: 23vh;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+`
+
 const mappedProducts = productData.map((product, index) => (
-  <img key={index} src={product.img} alt={product.alt} />
+  <QualityItems key={index}>
+    <img key={index} src={product.img} alt={product.alt} />
+  </QualityItems>
 ))
 
 const mappedReviews = userReviews.map((review, index) => (
