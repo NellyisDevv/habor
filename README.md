@@ -1,3 +1,14 @@
+# cob404fc1933322be3b97eb4f
+
+Quick start:
+
+```
+$ npm install
+$ npm start
+```
+
+Head over to https://vitejs.dev/ to learn more about using vite
+
 ## Resources
 
 - https://stackoverflow.com/questions/37836821/line-break-on-mobile-phone-only

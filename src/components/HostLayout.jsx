@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { css } from 'styled-components'
 import styled from 'styled-components'
-import device from '../../../device'
+import device from '../../device'
 import '../../index.css'
 
 const DashContainer = styled.div`

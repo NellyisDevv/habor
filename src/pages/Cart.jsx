@@ -2,9 +2,10 @@ import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
 import { css } from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 import device from '../../device'
 import { Context } from '../main'
+import { getProducts } from '../../api'
 // import { Context } from '../main'
 
 const CartComponent = styled.div`
@@ -45,8 +46,9 @@ const CartItem = styled.div`
   display: flex;
 
   img {
-    height: 8em;
-    width: 8em;
+    height: 7em;
+    width: 7em;
+    object-fit: contain;
   }
 `
 
@@ -59,11 +61,15 @@ const Button = styled(Link)`
   cursor: pointer;
 `
 
+export function loader() {
+  return getProducts()
+}
+
 function Cart() {
   // const [allProducts, setAllProducts] = useContext(Context)
   // console.log(allProducts)
-  const [cartItems] = useContext(Context)
-  console.log(cartItems)
+  const [cartItems, setCartItems] = useContext(Context)
+  // console.log(cartItems)
 
   return cartItems.length > 0 ? (
     cartItems.map(item => (

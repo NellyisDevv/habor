@@ -1,17 +1,16 @@
 import React from 'react'
+import { Link, useSearchParams, useLoaderData } from 'react-router-dom'
+import { getProducts } from '../../../api'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import device from '../../../device'
-import { Link, useSearchParams, useLoaderData } from 'react-router-dom'
-// import '/server'
 import Product from '../../components/Product'
-import { getProducts } from '../../../api'
 
 const ProductContainer = styled.div`
   font-family: 'poppins', sans-serif;
 `
 
-const Products = styled.div`
+const ProductsContainer = styled.div`
   display: grid;
   justify-items: center;
   width: 90%;
@@ -35,14 +34,19 @@ const Explore = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding-top: 5em;
+  align-items: left;
+  padding: 2em 0em;
 
   h2 {
     margin-bottom: 0.2em;
     padding-right: 1em;
     padding-left: 0.5em;
     font-weight: 500;
+  }
+
+  @media ${device.sm} {
+    align-items: center;
+    padding: 3em 4em;
   }
 `
 
@@ -102,6 +106,7 @@ const P = styled.button`
   text-decoration: underline;
   cursor: pointer;
   font-size: 0.9rem;
+  background-color: white;
 `
 
 const LinkBtn = styled(Link)`
@@ -121,42 +126,21 @@ const LinkBtn = styled(Link)`
 `
 
 export function loader() {
-  // throw new Error('Broken!')
-  // const data = await getProducts()
-  // return data
   return getProducts()
 }
 
-export default function Shop() {
-  // const [products, setProducts] = React.useState([])
-  // const [loading, setLoading] = React.useState(false)
+export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [error, setError] = React.useState(null)
   const products = useLoaderData()
 
   const typeFilter = searchParams.get('type')
 
-  // console.log(searchParams.toString())
-  // console.log(searchParams.get('type'))
-  // console.log(data)
-
-  // React.useEffect(() => {
-  //   async function loadProducts() {
-  //     setLoading(true)
-  //     const data = await getProducts()
-  //     setProducts(data)
-  //     setLoading(false)
-  //   }
-
-  //   loadProducts()
-  // }, [])
-
   const displayedProducts = typeFilter
     ? products.filter(product => product.type.toLowerCase() === typeFilter)
     : products
 
-  // Slower React code when doing it this way, instead code out the product component.
-  const mappedProducts = displayedProducts.map(product => (
+  const productElements = displayedProducts.map(product => (
     <Product
       key={product.id}
       id={product.id}
@@ -182,14 +166,6 @@ export default function Shop() {
     return `?${sp.toString()}`
   }
 
-  // if (loading) {
-  //   return (
-  //     <LoadingState>
-  //       <h1>Loading...</h1>
-  //     </LoadingState>
-  //   )
-  // }
-
   if (error) {
     return <h1>There was an error: {error.message}</h1>
   }
@@ -199,10 +175,6 @@ export default function Shop() {
       <Explore>
         <h2>Explore our product options</h2>
         <ButtonContainer>
-          {/* <Button onClick={() => setSearchParams({ type: 'skincare' })} skin>
-            to='?type=skincare'
-            Skincare
-          </Button> */}
           <LinkBtn to={genNewSearchParamString('type', 'skincare')}>
             Skincare
           </LinkBtn>
@@ -216,10 +188,9 @@ export default function Shop() {
           {typeFilter && (
             <P onClick={() => setSearchParams({})}>Clear filters</P>
           )}{' '}
-          {/* to='.' */}
         </ButtonContainer>
       </Explore>
-      <Products>{mappedProducts}</Products>
+      <ProductsContainer>{productElements}</ProductsContainer>
     </ProductContainer>
   )
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import { css } from 'styled-components'
 import styled from 'styled-components'
-import device from '../../../../../device'
+import device from '../../../device'
 import { useParams, NavLink, Outlet, useOutletContext } from 'react-router-dom'
-import productsList from '../../../../data/productsList'
+import productsList from '../../data/productsList'
 
 const SellerDetails = styled.div`
   /* background-color: darkcyan; */
@@ -29,28 +29,31 @@ const ImageContainer = styled.div`
   justify-content: left;
 `
 
-function SellerPhotos() {
-  const [product, setProduct] = React.useState(null)
+function HostProductPhotos() {
+  // const [product, setProduct] = React.useState(null)
+  const product = useOutletContext()
 
-  const params = useParams()
-  const paramId = Number(params.id)
+  // const params = useParams()
+  // const paramId = Number(params.id)
 
-  const mappedProduct = productsList.map(product =>
-    product.id === paramId
-      ? React.useEffect(() => {
-          setProduct(product)
-        }, [paramId])
-      : null
-  )
+  // const mappedProduct = productsList.map(product =>
+  //   product.id === paramId
+  //     ? React.useEffect(() => {
+  //         setProduct(product)
+  //       }, [paramId])
+  //     : null
+  // )
 
   // console.log(product)
+
+  // console.log(product[0].imageUrl)
 
   return (
     <SellerDetails>
       {product ? (
         <Details>
           <ImageContainer>
-            <img src={product.image} alt='' />
+            <img src={product[0].imageUrl} alt='' />
           </ImageContainer>
         </Details>
       ) : (
@@ -62,4 +65,4 @@ function SellerPhotos() {
   )
 }
 
-export default SellerPhotos
+export default HostProductPhotos

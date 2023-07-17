@@ -11,7 +11,7 @@ export async function getProducts(id) {
       status: res.status,
     }
   }
-  let data = await res.json()
+  const data = await res.json()
   return data.products
 }
 

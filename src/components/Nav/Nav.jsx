@@ -94,7 +94,7 @@ function Nav() {
           Login
         </Login>
         <Cart to='cart'>
-          <CartImage src='/cart-black.svg' />
+          <CartImage src='/images/cart-black.svg' />
           <p>0</p>
         </Cart>
       </CartContainer>

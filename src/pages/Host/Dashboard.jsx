@@ -6,6 +6,7 @@ import device from '../../../device'
 import productsList from '../../data/productsList'
 import topProducts from '../../data/topProducts'
 import { getHostProducts } from '../../../api'
+import { requireAuth } from '../../../utils'
 
 const DashContainer = styled.div`
   /* background-color: #7fbd7f; */
@@ -176,7 +177,8 @@ const Bold = styled.span`
 //   </Products>
 // ))
 
-export function loader() {
+export async function loader() {
+  // await requireAuth()
   return getHostProducts()
 }
 

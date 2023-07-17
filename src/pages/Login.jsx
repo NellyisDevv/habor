@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { css } from 'styled-components'
 import imageUrl from '/images/m-test.png'
 import styled from 'styled-components'
