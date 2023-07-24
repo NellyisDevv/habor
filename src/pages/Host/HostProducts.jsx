@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData, defer, Await } from 'react-router-dom'
 import { getHostProducts } from '../../../api'
 import styled from 'styled-components'
 import device from '../../../device'
@@ -78,28 +78,34 @@ const ProductImg = styled.div`
   }
 `
 
+const Loading = styled.div``
+
 const ProductDetail = styled.div``
 
 export function loader() {
-  return getHostProducts()
+  return defer({ hostProducts: getHostProducts() })
 }
 
 function HostProducts() {
-  const products = useLoaderData()
+  const dataPromise = useLoaderData()
 
-  const listedProductsElements = products.map((product, index) => (
-    <Products key={index} to={`${product.id}`}>
-      <ProductInfo>
-        <ProductImg>
-          <img src={product.imageUrl} alt='' />
-        </ProductImg>
-        <ProductDetail>
-          <h5>{product.shortName}</h5>
-          <p>${product.price}</p>
-        </ProductDetail>
-      </ProductInfo>
-    </Products>
-  ))
+  function renderHostProducts(products) {
+    const listedProductsElements = products.map((product, index) => (
+      <Products key={index} to={`${product.id}`}>
+        <ProductInfo>
+          <ProductImg>
+            <img src={product.imageUrl} alt='' />
+          </ProductImg>
+          <ProductDetail>
+            <h5>{product.shortName}</h5>
+            <p>${product.price}</p>
+          </ProductDetail>
+        </ProductInfo>
+      </Products>
+    ))
+
+    return listedProductsElements
+  }
 
   return (
     <DashContainer>
@@ -107,7 +113,9 @@ function HostProducts() {
         <ListedContainer>
           <h4>Your listed products</h4>
         </ListedContainer>
-        {listedProductsElements}
+        <React.Suspense>
+          <Await resolve={dataPromise.hostProducts}>{renderHostProducts}</Await>
+        </React.Suspense>
       </ListedProducts>
     </DashContainer>
   )

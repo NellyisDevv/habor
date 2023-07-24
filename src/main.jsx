@@ -28,14 +28,17 @@ import HostProductInfo from './pages/Host/HostProductInfo'
 import HostProductPricing from './pages/Host/HostProductPricing'
 import HostProductPhotos from './pages/Host/HostProductPhotos'
 import NotFound from './pages/NotFound'
-import Login from './pages/Login'
+import Login, {
+  loader as loginLoader,
+  action as loginAction,
+} from './pages/Login'
 import Layout from './components/Layout'
 import HostLayout from './components/HostLayout'
 import Error from './components/Error'
-import { requireAuth } from '../utils'
 import Cart from './pages/Cart'
 import '../index.css'
 import AuthRequired from './components/AuthRequired'
+// localStorage.removeItem('loggedin')
 
 import '../server'
 
@@ -44,7 +47,12 @@ const router = createBrowserRouter(
     <Route path='/' element={<Layout />}>
       <Route index element={<Home />} />
       <Route path='about' element={<About />} />
-      <Route path='login' element={<Login />} />
+      <Route
+        path='login'
+        element={<Login />}
+        loader={loginLoader}
+        action={loginAction}
+      />
       <Route path='cart' element={<Cart />} />
       <Route
         path='shop'
@@ -54,23 +62,30 @@ const router = createBrowserRouter(
       />
       <Route
         path='shop/:id'
+        errorElement={<Error />}
         element={<ProductDetail />}
         loader={productDetailLoader}
       />
 
       <Route element={<AuthRequired />}>
         <Route path='host' element={<HostLayout />}>
-          <Route index element={<Dashboard />} loader={dashboardLoader} />
+          <Route
+            index
+            element={<Dashboard />}
+            errorElement={<Error />}
+            loader={dashboardLoader}
+          />
           <Route path='income' element={<Income />} />
           <Route path='reviews' element={<Reviews />} />
           <Route
             path='products'
             element={<HostProducts />}
+            errorElement={<Error />}
             loader={hostProductsLoader}
           />
-
           <Route
             path='products/:id'
+            errorElement={<Error />}
             element={<HostProductDetail />}
             loader={hostProductDetailLoader}
           >
@@ -80,6 +95,7 @@ const router = createBrowserRouter(
           </Route>
         </Route>
       </Route>
+
       <Route path='*' element={<NotFound />} />
     </Route>
   )

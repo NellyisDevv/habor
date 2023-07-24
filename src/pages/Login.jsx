@@ -1,13 +1,22 @@
 import React from 'react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import {
+  NavLink,
+  useLoaderData,
+  useNavigate,
+  useSearchParams,
+  Form,
+  redirect,
+  useActionData,
+  useNavigation,
+} from 'react-router-dom'
 import { css } from 'styled-components'
 import imageUrl from '/images/m-test.png'
 import styled from 'styled-components'
 import device from '../../device'
+import { loginUser } from '../../api'
 
 const LoginContainer = styled.div`
   font-family: 'poppins', sans-serif;
-  /* background-color: lightcoral; */
   padding: 2em 0.8em;
   display: grid;
   gap: 0.8em;
@@ -29,7 +38,6 @@ const LoginForm = styled.div`
   padding: 1em;
   width: 95%;
   max-width: 550px;
-  /* max-width: 500px; */
   border-radius: 2em;
 
   @media ${device.sm} {
@@ -42,7 +50,6 @@ const FormContent = styled.div`
   justify-items: center;
   align-items: center;
   gap: 1.3em;
-  /* background-color: lightblue; */
   width: 100%;
   max-width: 400px;
   padding: 1em;
@@ -59,23 +66,27 @@ const FormContent = styled.div`
     border-radius: 0.5em;
     width: 100%;
     cursor: pointer;
+
+    &:disabled {
+      background-color: #85a16d;
+      cursor: progress;
+    }
   }
 
   p {
+    text-align: center;
     font-size: 0.9rem;
   }
 `
 
-const Form = styled.form`
+const UserForm = styled(Form)`
   display: grid;
   justify-items: center;
   align-items: center;
-  /* background-color: lightblue; */
   width: 100%;
 
   input {
     padding: 0.6em;
-    /* border-radius: 0.5em; */
     width: 100%;
   }
 `
@@ -100,25 +111,55 @@ const Direct = styled.span`
   cursor: pointer;
 `
 
+const Message = styled.div`
+  text-align: center;
+
+  p {
+    margin-bottom: 0.4em;
+  }
+
+  h4 {
+    font-weight: 600;
+  }
+`
+
+const LoginAlert = styled.div`
+  background-color: #e8b8b8;
+  color: #d65656;
+  border: 1px solid #d65656;
+  border-radius: 0.4em;
+  padding: 0.1em 0em;
+`
+
+const ErrorMessage = styled.div`
+  h4 {
+    color: #d65656;
+    margin-top: 0.3em;
+    font-size: 1rem;
+  }
+`
+
+export function loader({ request }) {
+  return new URL(request.url).searchParams.get('message')
+}
+
+export async function action({ request }) {
+  const formData = await request.formData()
+  const email = formData.get('email')
+  const password = formData.get('password')
+  try {
+    const data = await loginUser({ email, password })
+    localStorage.setItem('loggedin', true)
+    return redirect('/host')
+  } catch (err) {
+    return err.message
+  }
+}
+
 export default function Login() {
-  const [loginFormData, setLoginFormData] = React.useState({
-    email: '',
-    password: '',
-  })
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    console.log(loginFormData)
-  }
-
-  function handleChange(e) {
-    const { name, value } = e.target
-
-    setLoginFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
+  const searchParam = useLoaderData()
+  const navigation = useNavigation()
+  const error = useActionData()
 
   return (
     <LoginContainer>
@@ -126,29 +167,32 @@ export default function Login() {
         <FormContent>
           <img src={imageUrl} alt='Site Logo' />
           <h2>Sign in</h2>
-          <p>
-            New to Minazia? <Direct>Sign up for free</Direct>
-          </p>
-          <Form onSubmit={handleSubmit}>
-            <InputOne
-              name='email'
-              value={loginFormData.email}
-              onChange={handleChange}
-              type='email'
-              placeholder='email'
-            />
-            <InputTwo
-              name='password'
-              value={loginFormData.password}
-              onChange={handleChange}
-              type='password'
-              placeholder='password'
-            />
-            <button>Sign in</button>
-          </Form>
+          <Message>
+            <p>
+              New to Minazia? <Direct>Sign up for free</Direct> <br />
+            </p>
+            {searchParam && (
+              <LoginAlert>
+                <h4>{searchParam}</h4>
+              </LoginAlert>
+            )}
+            <ErrorMessage>{error && <h4>{error}</h4>}</ErrorMessage>
+          </Message>
+          <UserForm method='POST' replace>
+            <InputOne name='email' type='email' placeholder='email' />
+            <InputTwo name='password' type='password' placeholder='password' />
+            <button disabled={navigation.state === 'submitting'}>
+              {navigation.state === 'submitting' ? 'Signing in' : 'Sign in'}
+            </button>
+          </UserForm>
           <p>
             <Direct>Forgot Minazia Password?</Direct>
           </p>
+          <div>
+            <h3>Demo Account</h3>
+            <p>email: b@b.com</p>
+            <p>password: p123</p>
+          </div>
         </FormContent>
       </LoginForm>
     </LoginContainer>

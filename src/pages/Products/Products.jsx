@@ -1,10 +1,17 @@
 import React from 'react'
-import { Link, useSearchParams, useLoaderData } from 'react-router-dom'
+import {
+  Link,
+  useSearchParams,
+  useLoaderData,
+  defer,
+  Await,
+} from 'react-router-dom'
 import { getProducts } from '../../../api'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import device from '../../../device'
 import Product from '../../components/Product'
+import { SpinnerCircularFixed } from 'spinners-react'
 
 const ProductContainer = styled.div`
   font-family: 'poppins', sans-serif;
@@ -125,33 +132,22 @@ const LinkBtn = styled(Link)`
   }
 `
 
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 68vh;
+`
+
 export function loader() {
-  return getProducts()
+  return defer({ products: getProducts() })
 }
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const [error, setError] = React.useState(null)
-  const products = useLoaderData()
+  const dataPromise = useLoaderData()
 
   const typeFilter = searchParams.get('type')
-
-  const displayedProducts = typeFilter
-    ? products.filter(product => product.type.toLowerCase() === typeFilter)
-    : products
-
-  const productElements = displayedProducts.map(product => (
-    <Product
-      key={product.id}
-      id={product.id}
-      name={product.name}
-      price={product.price}
-      description={product.description}
-      imageUrl={product.imageUrl}
-      typeFilter={searchParams}
-      filter={typeFilter}
-    />
-  ))
 
   function genNewSearchParamString(key, value) {
     const sp = new URLSearchParams(searchParams)
@@ -166,8 +162,29 @@ export default function Products() {
     return `?${sp.toString()}`
   }
 
-  if (error) {
-    return <h1>There was an error: {error.message}</h1>
+  function renderProductElements(products) {
+    const displayedProducts = typeFilter
+      ? products.filter(product => product.type.toLowerCase() === typeFilter)
+      : products
+
+    const productElements = displayedProducts.map(product => (
+      <Product
+        key={product.id}
+        id={product.id}
+        name={product.name}
+        price={product.price}
+        description={product.description}
+        imageUrl={product.imageUrl}
+        typeFilter={searchParams}
+        filter={typeFilter}
+      />
+    ))
+
+    return (
+      <>
+        <ProductsContainer>{productElements}</ProductsContainer>
+      </>
+    )
   }
 
   return (
@@ -190,7 +207,15 @@ export default function Products() {
           ) : null}
         </ButtonContainer>
       </Explore>
-      <ProductsContainer>{productElements}</ProductsContainer>
+      <React.Suspense
+        fallback={
+          <Loading>
+            <SpinnerCircularFixed size={100} thickness={150} color='#456828' />
+          </Loading>
+        }
+      >
+        <Await resolve={dataPromise.products}>{renderProductElements}</Await>
+      </React.Suspense>
     </ProductContainer>
   )
 }

@@ -7,10 +7,13 @@ import {
   useLocation,
   useLoaderData,
   Outlet,
+  defer,
+  Await,
 } from 'react-router-dom'
 import device from '../../../device'
-import '/server'
 import { getProducts } from '../../../api'
+import { SpinnerCircularFixed } from 'spinners-react'
+import '/server'
 
 const DetailContainer = styled.div`
   font-family: 'poppins', sans-serif;
@@ -98,7 +101,6 @@ const ImagePreview = styled.div`
 `
 
 const Return = styled.div`
-  /* background-color: lightblue; */
   width: 100%;
   padding: 2em 0.9em;
 
@@ -118,9 +120,16 @@ const ReturnLink = styled(Link)`
   }
 `
 
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 68vh;
+`
+
 export function loader({ params }) {
   // console.log(params)
-  return getProducts(params.id)
+  return defer({ currentProduct: getProducts(params.id) })
 }
 
 function ProductDetail() {
@@ -128,6 +137,7 @@ function ProductDetail() {
   // const [product, setProduct] = React.useState(null)
   const location = useLocation()
   const product = useLoaderData()
+
   const [formData, setFormData] = React.useState({
     ...product,
     quantity: 1,
@@ -197,18 +207,8 @@ function ProductDetail() {
   // const previousFilter = location.state?.serach || 'products'
   // const previousFilter = location.state.search
 
-  return (
-    <DetailContainer>
-      <Return>
-        <ReturnLink
-          to={previousFilter ? `/shop?${previousFilter}` : '..'}
-          relative='path'
-        >
-          {/* {previousFilter ? '← Back to all products' : 'something'} */}
-          {/* {filterMessage} */}← Back to all {type}
-        </ReturnLink>
-      </Return>
-
+  function renderProductDetail(product) {
+    return (
       <ProductListing>
         <ProductImage>
           <ImagePreview>
@@ -235,6 +235,30 @@ function ProductDetail() {
           </Form>
         </ProductInfo>
       </ProductListing>
+    )
+  }
+
+  return (
+    <DetailContainer>
+      <Return>
+        <ReturnLink
+          to={previousFilter ? `/shop?${previousFilter}` : '..'}
+          relative='path'
+        >
+          {/* {previousFilter ? '← Back to all products' : 'something'} */}
+          {/* {filterMessage} */}← Back to all {type}
+        </ReturnLink>
+      </Return>
+
+      <React.Suspense
+        fallback={
+          <Loading>
+            <SpinnerCircularFixed size={100} thickness={150} color='#456828' />
+          </Loading>
+        }
+      >
+        <Await resolve={product.currentProduct}>{renderProductDetail}</Await>
+      </React.Suspense>
     </DetailContainer>
   )
 }
