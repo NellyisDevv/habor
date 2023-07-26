@@ -38,9 +38,9 @@ import Error from './components/Error'
 import Cart from './pages/Cart'
 import '../index.css'
 import AuthRequired from './components/AuthRequired'
-// localStorage.removeItem('loggedin')
+localStorage.removeItem('loggedin')
 
-import '../server'
+// import '../server'
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -8,6 +8,7 @@ import {
   redirect,
   useActionData,
   useNavigation,
+  useLocation,
 } from 'react-router-dom'
 import { css } from 'styled-components'
 import imageUrl from '/images/m-test.png'
@@ -147,19 +148,28 @@ export async function action({ request }) {
   const formData = await request.formData()
   const email = formData.get('email')
   const password = formData.get('password')
+
   try {
     const data = await loginUser({ email, password })
     localStorage.setItem('loggedin', true)
-    return redirect('/host')
+    return data
   } catch (err) {
     return err.message
   }
 }
 
 export default function Login() {
+  const data = useActionData()
+  const location = useLocation()
+  const navigate = useNavigate()
   const searchParam = useLoaderData()
   const navigation = useNavigation()
   const error = useActionData()
+  const from = location.state?.from || '/host'
+
+  if (data?.token) {
+    navigate(from, { replace: true })
+  }
 
   return (
     <LoginContainer>
@@ -171,12 +181,12 @@ export default function Login() {
             <p>
               New to Minazia? <Direct>Sign up for free</Direct> <br />
             </p>
-            {searchParam && (
+            <ErrorMessage>{error && <h4>{error}</h4>}</ErrorMessage>
+            {location.state?.message && (
               <LoginAlert>
-                <h4>{searchParam}</h4>
+                <h4>{location.state.message}</h4>
               </LoginAlert>
             )}
-            <ErrorMessage>{error && <h4>{error}</h4>}</ErrorMessage>
           </Message>
           <UserForm method='POST' replace>
             <InputOne name='email' type='email' placeholder='email' />

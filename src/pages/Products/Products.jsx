@@ -20,6 +20,7 @@ const ProductContainer = styled.div`
 const ProductsContainer = styled.div`
   display: grid;
   justify-items: center;
+  align-items: baseline;
   width: 90%;
   max-width: 1400px;
   margin: auto;
@@ -27,6 +28,7 @@ const ProductsContainer = styled.div`
   padding: 1em;
   margin-top: 3em;
   margin-bottom: 4em;
+  min-height: 50vh;
 
   @media ${device.md} {
     grid-template-columns: repeat(2, 1fr);

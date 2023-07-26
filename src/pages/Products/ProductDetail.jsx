@@ -11,7 +11,7 @@ import {
   Await,
 } from 'react-router-dom'
 import device from '../../../device'
-import { getProducts } from '../../../api'
+import { getProduct } from '../../../api'
 import { SpinnerCircularFixed } from 'spinners-react'
 import '/server'
 
@@ -129,17 +129,17 @@ const Loading = styled.div`
 
 export function loader({ params }) {
   // console.log(params)
-  return defer({ currentProduct: getProducts(params.id) })
+  return defer({ currentProduct: getProduct(params.id) })
 }
 
 function ProductDetail() {
   // const params = useParams()
   // const [product, setProduct] = React.useState(null)
   const location = useLocation()
-  const product = useLoaderData()
+  const dataPromise = useLoaderData()
 
   const [formData, setFormData] = React.useState({
-    ...product,
+    ...dataPromise,
     quantity: 1,
   })
 
@@ -257,7 +257,9 @@ function ProductDetail() {
           </Loading>
         }
       >
-        <Await resolve={product.currentProduct}>{renderProductDetail}</Await>
+        <Await resolve={dataPromise.currentProduct}>
+          {renderProductDetail}
+        </Await>
       </React.Suspense>
     </DetailContainer>
   )

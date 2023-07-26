@@ -3,7 +3,7 @@ import { useParams, NavLink, Outlet, useLoaderData } from 'react-router-dom'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import device from '../../../device'
-import { getHostProducts } from '../../../api'
+import { getProduct } from '../../../api'
 
 const ProductContainer = styled.div`
   min-height: 64vh;
@@ -119,7 +119,7 @@ const BackToProducts = styled.div`
 `
 
 export async function loader({ params }) {
-  return getHostProducts(params.id)
+  return getProduct(params.id)
 }
 
 function HostProductDetail() {

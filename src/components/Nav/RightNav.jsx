@@ -83,7 +83,7 @@ const RightNav = ({ open }) => {
       >
         Host
       </NavLinks>
-      <NavLinks
+      {/* <NavLinks
         to='login'
         style={({ isActive }) => (isActive ? activeStyles : null)}
       >
@@ -91,7 +91,7 @@ const RightNav = ({ open }) => {
           ? // <img className='profile-img' src='/profile-circle-black.svg' alt='' />
             'Login'
           : null}
-      </NavLinks>
+      </NavLinks> */}
       {/* <li>Sign In</li>
       <li>Sign Up</li> */}
     </Ul>
